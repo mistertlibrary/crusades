@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Voices of the Cross &amp; Crescent</title>
+<title>Voices of the Cross &amp; Crescent — Crusades Project</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:       #F5EACC;
-  --surface:  #EBD99E;
-  --hi:       #E0CA88;
-  --border:   #B09A56;
+  --bg:       #EDE0B0;
+  --surface:  #E5D49A;
+  --hi:       #DAC880;
+  --border:   #A8904C;
   --border2:  #7A6830;
   --text:     #1C0E00;
   --muted:    #3C2600;
@@ -22,22 +22,46 @@
   --orange:   #904010;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
-  background: var(--bg);
+  /* Base vellum tone */
+  background-color: #EDE0B0;
+  /* Layered gradients: edge darkening + blotchy warm variation */
   background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(160,120,40,0.04) 40px, rgba(160,120,40,0.04) 41px),
-    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(160,120,40,0.04) 40px, rgba(160,120,40,0.04) 41px);
+    /* Top-left aging patch */
+    radial-gradient(ellipse 60% 40% at 8% 6%,  rgba(180,130,40,0.18) 0%, transparent 70%),
+    /* Bottom-right warm burn */
+    radial-gradient(ellipse 50% 50% at 94% 96%, rgba(160,110,30,0.20) 0%, transparent 65%),
+    /* Top-right cool-ivory highlight */
+    radial-gradient(ellipse 45% 35% at 88% 4%,  rgba(255,245,210,0.35) 0%, transparent 60%),
+    /* Centre-left subtle shadow */
+    radial-gradient(ellipse 40% 55% at 12% 55%, rgba(140,100,30,0.10) 0%, transparent 60%),
+    /* Bottom-left worn patch */
+    radial-gradient(ellipse 50% 40% at 5% 92%,  rgba(170,120,40,0.15) 0%, transparent 60%),
+    /* General mid vignette */
+    radial-gradient(ellipse 90% 80% at 50% 50%, rgba(235,218,165,0.0) 40%, rgba(170,130,60,0.18) 100%);
   color: var(--text);
   font-family: 'Lora', Georgia, serif;
   font-size: 18px;
   line-height: 1.75;
   min-height: 100vh;
+  position: relative;
 }
 
-#app { max-width: 1080px; margin: 0 auto; padding: 36px 24px 80px; }
+/* Grain overlay — SVG feTurbulence noise, fixed so it doesn't scroll */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeBlend in='SourceGraphic' mode='multiply'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+}
+#app { max-width: 1080px; margin: 0 auto; padding: 36px 24px 80px; position: relative; z-index: 1; }
 
 /* ── Typography ──────────────────────────────────────────────────────────── */
 .cinzel { font-family: 'Cinzel', 'Times New Roman', serif; }
@@ -128,30 +152,13 @@ h2.section-title {
   transition: all 0.18s;
   display: inline-block;
 }
-.btn:hover {
-  border-color: var(--border2);
-  background: var(--hi);
-  color: var(--text);
-}
-.btn-primary {
-  background: #7A3C00;
-  border-color: #7A3C00;
-  color: #F5EACC;
-}
-.btn-primary:hover {
-  background: #5A2A00;
-  border-color: #5A2A00;
-  color: #F5EACC;
-}
+.btn:hover { border-color: var(--border2); background: var(--hi); color: var(--text); }
+.btn-primary { background: #7A3C00; border-color: #7A3C00; color: #F5EACC; }
+.btn-primary:hover { background: #5A2A00; border-color: #5A2A00; color: #F5EACC; }
 
 /* ── Progress dots ───────────────────────────────────────────────────────── */
 .dots { display: flex; justify-content: center; gap: 8px; margin: 18px 0; }
-.dot {
-  width: 9px; height: 9px;
-  border-radius: 50%;
-  background: var(--border);
-  transition: background 0.2s;
-}
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); transition: background 0.2s; }
 .dot.active { background: #7A3C00; }
 
 /* ── Crusade grid ────────────────────────────────────────────────────────── */
@@ -174,45 +181,15 @@ h2.section-title {
   overflow: hidden;
   box-shadow: 0 1px 5px rgba(0,0,0,0.07);
 }
-.crusade-btn:hover {
-  background: var(--hi);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.13);
-}
-.crusade-top-bar {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  border-radius: 6px 6px 0 0;
-}
-.crusade-label {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-.crusade-theme {
-  font-family: 'Cinzel', serif;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 7px;
-  line-height: 1.2;
-}
+.crusade-btn:hover { background: var(--hi); box-shadow: 0 4px 18px rgba(0,0,0,0.13); }
+.crusade-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: 6px 6px 0 0; }
+.crusade-label { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
+.crusade-theme { font-family: 'Cinzel', serif; font-size: 20px; font-weight: 600; margin-bottom: 7px; line-height: 1.2; }
 .crusade-desc { font-size: 14px; line-height: 1.6; color: var(--muted); }
-.crusade-dates {
-  font-size: 12px;
-  color: var(--faint);
-  font-family: 'Cinzel', serif;
-  letter-spacing: 1px;
-  margin-top: 10px;
-  border-top: 1px solid var(--border);
-  padding-top: 8px;
-}
+.crusade-dates { font-size: 12px; color: var(--faint); font-family: 'Cinzel', serif; letter-spacing: 1px; margin-top: 10px; border-top: 1px solid var(--border); padding-top: 8px; }
 
 /* ── Persona accordion ───────────────────────────────────────────────────── */
 .persona-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
-
 .persona-header {
   width: 100%;
   background: var(--surface);
@@ -228,169 +205,59 @@ h2.section-title {
   transition: all 0.15s;
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
-.persona-header:hover {
-  background: var(--hi);
-  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-}
-.persona-header.open {
-  border-radius: 6px 6px 0 0;
-  border-bottom: none;
-  background: var(--hi);
-}
+.persona-header:hover { background: var(--hi); box-shadow: 0 3px 12px rgba(0,0,0,0.1); }
+.persona-header.open { border-radius: 6px 6px 0 0; border-bottom: none; background: var(--hi); }
 .persona-sym { font-size: 26px; flex-shrink: 0; }
 .persona-title { flex: 1; min-width: 0; }
 .persona-name { font-size: 19px; font-family: 'Cinzel', serif; font-weight: 600; margin-bottom: 2px; }
 .persona-role { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-family: 'Cinzel', serif; font-weight: 600; }
 .persona-meta { display: flex; gap: 10px; align-items: center; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
-.tag {
-  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
-  padding: 3px 10px; border-radius: 3px; font-family: 'Cinzel', serif; font-weight: 700;
-  border: 1px solid;
-}
+.tag { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; font-family: 'Cinzel', serif; font-weight: 700; border: 1px solid; }
 .tag-hist { color: var(--green); border-color: #1E602066; background: #1E602011; }
 .tag-recon { color: var(--orange); border-color: #90401066; background: #90401011; }
 .arrow { color: var(--faint); font-size: 14px; font-weight: 700; flex-shrink: 0; }
-
-.persona-body {
-  background: var(--hi);
-  border: 1.5px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 6px 6px;
-  padding: 24px 26px;
-}
-.persona-voice {
-  border-left: 3px solid;
-  padding-left: 18px;
-  margin-bottom: 18px;
-  font-style: italic;
-  font-size: 19px;
-  line-height: 1.65;
-}
+.persona-body { background: var(--hi); border: 1.5px solid var(--border); border-top: none; border-radius: 0 0 6px 6px; padding: 24px 26px; }
+.persona-voice { border-left: 3px solid; padding-left: 18px; margin-bottom: 18px; font-style: italic; font-size: 19px; line-height: 1.65; }
 .persona-bio { font-size: 17px; color: var(--muted); line-height: 1.85; margin-bottom: 6px; }
 
 /* ── Source links ────────────────────────────────────────────────────────── */
 .source-section { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; }
-.source-label {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--faint);
-  margin-bottom: 10px;
-}
+.source-label { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; color: var(--faint); margin-bottom: 6px; }
+.source-disclaimer { font-size: 13px; color: var(--faint); font-style: italic; margin-bottom: 10px; line-height: 1.6; }
 .source-item { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 7px; }
 .source-arrow { color: var(--faint); flex-shrink: 0; font-size: 14px; margin-top: 2px; }
-.source-link {
-  color: var(--blue);
-  text-decoration: underline;
-  text-decoration-color: rgba(10,72,120,0.4);
-  font-size: 15px;
-  line-height: 1.55;
-}
+.source-link { color: var(--blue); text-decoration: underline; text-decoration-color: rgba(10,72,120,0.4); font-size: 15px; line-height: 1.55; }
 .source-link:hover { color: var(--red); text-decoration-color: var(--red); }
 
 /* ── Requirements ────────────────────────────────────────────────────────── */
-.req {
-  border: 1.5px solid var(--border);
-  border-radius: 6px;
-  padding: 18px 22px;
-  background: var(--surface);
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  margin-bottom: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-}
+.req { border: 1.5px solid var(--border); border-radius: 6px; padding: 18px 22px; background: var(--surface); display: flex; gap: 16px; align-items: flex-start; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
 .req-icon { font-size: 26px; flex-shrink: 0; }
-.req-label {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--faint);
-  margin-bottom: 6px;
-}
+.req-label { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; color: var(--faint); margin-bottom: 6px; }
 .req-text { font-size: 16px; color: var(--muted); line-height: 1.75; }
 
 /* ── Furniture card ──────────────────────────────────────────────────────── */
-.furn-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 6px;
-  padding: 32px;
-  position: relative;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  margin-bottom: 22px;
-}
-.furn-top-bar {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  border-radius: 6px 6px 0 0;
-  background: linear-gradient(90deg, #C8860A, #8B5500);
-}
-.furn-counter {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--faint);
-  font-weight: 600;
-  margin-bottom: 16px;
-}
+.furn-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 6px; padding: 32px; position: relative; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 22px; }
+.furn-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: 6px 6px 0 0; background: linear-gradient(90deg, #C8860A, #8B5500); }
+.furn-counter { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--faint); font-weight: 600; margin-bottom: 16px; }
 .furn-question { font-size: 21px; margin-bottom: 18px; line-height: 1.5; }
 .furn-answer { font-size: 17px; color: var(--muted); line-height: 1.85; font-style: italic; }
 
 /* ── Pairing notice ──────────────────────────────────────────────────────── */
-.pairing-notice {
-  border-radius: 6px;
-  padding: 18px 22px;
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  margin-bottom: 24px;
-}
+.pairing-notice { border-radius: 6px; padding: 18px 22px; display: flex; gap: 16px; align-items: flex-start; margin-bottom: 24px; }
 
 /* ── Legacy block ────────────────────────────────────────────────────────── */
-.legacy-block {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 16px 20px;
-  margin-top: 10px;
-}
-.legacy-label {
-  font-family: 'Cinzel', serif;
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--faint);
-  margin-bottom: 6px;
-}
+.legacy-block { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 16px 20px; margin-top: 10px; }
+.legacy-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; color: var(--faint); margin-bottom: 6px; }
 .legacy-text { font-size: 15px; color: var(--faint); line-height: 1.75; font-style: italic; }
 
 /* ── Nav ─────────────────────────────────────────────────────────────────── */
 .back-row { margin-bottom: 28px; }
 
 /* ── Footer ──────────────────────────────────────────────────────────────── */
-.site-footer {
-  text-align: center;
-  margin-top: 60px;
-  padding-top: 22px;
-  border-top: 1px solid var(--border);
-  font-size: 14px;
-  color: var(--faint);
-  font-style: italic;
-}
+.site-footer { text-align: center; margin-top: 60px; padding-top: 22px; border-top: 1px solid var(--border); font-size: 14px; color: var(--faint); font-style: italic; }
 
 /* ── Fade-in ─────────────────────────────────────────────────────────────── */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 .fade-in { animation: fadeIn 0.28s ease forwards; }
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
@@ -402,53 +269,11 @@ h2.section-title {
 }
 </style>
 </head>
-
 <body>
 <div id="app"></div>
-
 <script>
-// ─── CURSOR SVGs ─────────────────────────────────────────────────────────────
-// Three knight-themed cursors: helmet (default), sword (pointer), shield (back/nav)
-
-const SVG_HELMET = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <path d="M7 23 Q6 11 16 9 Q26 11 25 23" fill="%23909090" stroke="%23606060" stroke-width="1.5"/>
-  <rect x="7" y="21" width="18" height="9" rx="3" fill="%23909090" stroke="%23606060" stroke-width="1.5"/>
-  <line x1="9" y1="24" x2="23" y2="24" stroke="%23404040" stroke-width="1.8"/>
-  <line x1="9" y1="27" x2="23" y2="27" stroke="%23404040" stroke-width="1.8"/>
-  <path d="M16 9 Q13 5 10 2 Q14 5 16 7 Q18 5 22 2 Q19 5 16 9" fill="%23CC1818"/>
-  <path d="M12 9 Q14 7 16 7 Q18 7 20 9" fill="%23CC1818" stroke="%23AA1010" stroke-width="0.5"/>
-</svg>`;
-
-const SVG_SWORD = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <line x1="5" y1="27" x2="27" y2="5" stroke="%23B0B0B0" stroke-width="3.5" stroke-linecap="round"/>
-  <line x1="5" y1="27" x2="27" y2="5" stroke="%23E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="18" y1="14" x2="26" y2="20" stroke="%23C8A800" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="20" y1="11" x2="25" y2="21" stroke="%23C8A800" stroke-width="2.5" stroke-linecap="round"/>
-  <circle cx="5" cy="27" r="3" fill="%23C8A800"/>
-  <line x1="7" y1="25" x2="15" y2="17" stroke="%238B6010" stroke-width="3.5" stroke-linecap="round"/>
-</svg>`;
-
-const SVG_SHIELD = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
-  <path d="M14 2 L26 7 V15 C26 22 20 26 14 27 C8 26 2 22 2 15 V7 Z" fill="%23982020" stroke="%23641010" stroke-width="1.5"/>
-  <rect x="12.5" y="5" width="3" height="17" rx="1.5" fill="%23F0D878"/>
-  <rect x="6" y="11" width="16" height="3" rx="1.5" fill="%23F0D878"/>
-</svg>`;
-
-const CURSOR_HELMET = `url("data:image/svg+xml,${encodeURIComponent(SVG_HELMET)}") 16 16, default`;
-const CURSOR_SWORD  = `url("data:image/svg+xml,${encodeURIComponent(SVG_SWORD)}") 27 5, pointer`;
-const CURSOR_SHIELD = `url("data:image/svg+xml,${encodeURIComponent(SVG_SHIELD)}") 14 14, pointer`;
-
-// Apply cursors via CSS injection
-const style = document.createElement('style');
-style.textContent = `
-  body { cursor: ${CURSOR_HELMET}; }
-  button, a, [data-action] { cursor: ${CURSOR_SWORD}; }
-  .btn-back { cursor: ${CURSOR_SHIELD}; }
-`;
-document.head.appendChild(style);
-
-
 // ─── DATA: MENTAL FURNITURE ───────────────────────────────────────────────────
+// ** USER'S EXACT TEXT — DO NOT MODIFY **
 
 const FURNITURE = [
   {
@@ -465,24 +290,20 @@ const FURNITURE = [
   },
   {
     q: "What was a relic: a fragment of a saint's bone or the True Cross?",
-    a: "Marvelous technology. A bone from Saint Peter or a chip of the cross Jesus died (called the True Cross) on was believed to emit divine power. Relics could heal the sick, protect armies, and guarantee victory in battle. Kings spent the equivalent of millions to own relics. Armies carried them into combat. When the Crusaders captured Jerusalem, they found what they believed to be the True Cross. They carried it into their next battle."
+    a: "Marvelous technology. A bone from Saint Peter or a chip of the cross Jesus died (the &ldquo;True Cross&rdquo;) on was believed to emit divine power. Relics could heal the sick, protect armies, and guarantee victory in battle. Kings spent the equivalent of millions to own relics. Armies carried them into combat. When the Crusaders captured Jerusalem, they found what they believed to be the True Cross. They carried it into their next battle."
   },
   {
     q: "How did Arabic writers first describe the Crusaders?",
-    a: "Many early Arabic chronicles found the arriving Franks (their word for Western Europeans) barbaric, poorly educated, and baffling. They were yokels, backwater rubes, and foolish fundamentalists, not a terrifying enemy. Ibn Jubayr and Usama ibn Munqidh, two Muslim writers from this period, both described Frankish culture with a mix of horror and genuine curiosity. The idea of a single, centuries-long 'clash of civilizations' is a story later people told about this period. The reality was messier and more human."
+    a: "Many early Arabic chronicles found the arriving Franks (their word for Western Europeans) barbaric, poorly educated, and baffling. They were yokels, backwater rubes, and foolish fundamentalists, not a terrifying enemy. Ibn Jubayr and Usama ibn Munqidh, two Muslim writers from this period, both described Frankish culture with a mix of horror and genuine curiosity. The idea of a single, centuries-long &lsquo;clash of civilizations&rsquo; is a story later people told about this period. The reality was messier and more human."
   }
 ];
 
 
 // ─── DATA: CRUSADES ───────────────────────────────────────────────────────────
-// Each crusade: id, label, dates, theme, desc, accent (CSS color),
-//   consequence, legacy, personas[]
-// Each persona: name, role, type, sym, voice, bio, angle,
-//   unknowns (or null), living (or null), sources[]
 
 const CRUSADES = [
 
-// ── 1: THE FIRST CRUSADE ──────────────────────────────────────────────────────
+// ── 1: FIRST CRUSADE — USER'S EXACT TEXT ─────────────────────────────────────
 {
   id: 1, label: "First Crusade", dates: "1095–1099",
   theme: "The Conquerors", accent: "#8B4500",
@@ -493,7 +314,7 @@ const CRUSADES = [
     {
       name: "Godfrey of Bouillon", role: "Crusader Commander", type: "Historical", sym: "⚔️",
       voice: '"God wills it. I have bled for it."',
-      bio: "Godfrey was a French duke who led the final assault on Jerusalem in 1099 and became the city's first Christian ruler. He refused the title 'King,' insisting he would only be called 'Advocate of the Holy Sepulchre,' the guardian of the church built over Christ's tomb. He died the following year, probably from illness. His reputation was carefully polished by chroniclers who needed a perfect Crusade hero.",
+      bio: "Godfrey was a French duke who led the final assault on Jerusalem in 1099 and became the city's first Christian ruler. He refused the title &lsquo;King,&rsquo; insisting he would only be called &lsquo;Advocate of the Holy Sepulchre,&rsquo; the guardian of the church built over Christ's tomb. He died the following year, probably from illness. His reputation was carefully polished by chroniclers who needed a perfect Crusade hero.",
       angle: "Your job is to defend the brutal sack of Jerusalem as a sacred act and then to examine that defense. What does violence cost a Christian soul when it's done in God's name? Then go further: trace how Godfrey has been invoked since his death. Medieval chroniclers needed a hero. Nineteenth-century Belgian nationalists claimed him as their own. Contemporary far-right groups use his image online. What does each claim reveal about the person making it?",
       unknowns: null,
       living: null,
@@ -507,7 +328,7 @@ const CRUSADES = [
       name: "Alexios I Komnenos", role: "Byzantine Emperor", type: "Historical", sym: "👑",
       voice: '"I asked for mercenaries. I received a storm."',
       bio: "Alexios ruled the Byzantine Empire, which comprised the surviving eastern half of the old Roman Empire, from Constantinople (modern Istanbul). When the Seljuq Turks threatened his borders, he sent a letter to the Pope asking for Western military help. He expected a few thousand hired soldiers. What arrived was a massive, uncontrollable army of religious zealots who had a very different idea of what they were there to do.",
-      angle: "The Byzantine Empire was <em>Orthodox</em> Christian, not Catholic. In 1054, just forty years before the First Crusade, the Eastern and Western churches formally split in what's called the Great Schism. Alexios technically considered the Crusaders <em>schismatics</em>, or members of a church he regarded as illegitimate. Explore what it felt like to invite that army into your capital. Then ask: how has Byzantine history been squeezed out of Western memory of the Crusades? What do we miss by telling this story without Constantinople at its center?",
+      angle: "The Byzantine Empire was <em>Orthodox</em> Christian, not Catholic. In 1054, just forty years before the First Crusade, the Eastern and Western churches formally split in what's called the Great Schism. Alexios technically considered the Crusaders &ldquo;schismatics,&rdquo; or members of a church he regarded as illegitimate. Explore what it felt like to invite that army into your capital. Then ask: how has Byzantine history been squeezed out of Western memory of the Crusades? What do we miss by telling this story without Constantinople at its center?",
       unknowns: null,
       living: "The Greek Orthodox Patriarchate of Jerusalem, a direct descendant of the church Alexios was defending, still exists today. It administers Christian holy sites in Jerusalem and Bethlehem.",
       sources: [
@@ -532,32 +353,32 @@ const CRUSADES = [
   ]
 },
 
-// ── 2: THE SECOND CRUSADE ─────────────────────────────────────────────────────
+// ── 2: SECOND CRUSADE ────────────────────────────────────────────────────────
 {
   id: 2, label: "Second Crusade", dates: "1147–1149",
   theme: "The Kings", accent: "#1A3C6E",
-  desc: "Royal ambition, marital disaster, and humiliating defeat in the passes of Anatolia.",
-  consequence: "Both royal armies were separately and badly defeated by the Seljuq Turks before they even reached Jerusalem. A follow-up siege of Damascus — which had actually been a potential Crusader ally — ended in failure and permanently damaged relations between the Crusaders and that city.",
-  legacy: "Bernard of Clairvaux, the most powerful religious voice in Europe, had preached the Second Crusade with enormous authority. He spent his final years trying to explain why God had allowed a holy war to fail so completely. His answer — that the soldiers' sins caused the defeat — became the standard way of explaining all future Crusade failures. It blamed the soldiers. It protected the leaders and the institution that sent them.",
+  desc: "Royal ambition, marital disaster, and humiliating defeat in the mountain passes of Anatolia.",
+  consequence: "Both royal armies were separately routed by the Seljuq Turks before they even reached Jerusalem. A follow-up siege of Damascus, which had actually been a potential Crusader ally, ended in failure and permanently soured that relationship.",
+  legacy: "Bernard of Clairvaux, the most powerful religious voice in Europe, had preached this Crusade with enormous authority. He spent his final years trying to explain why God had allowed a holy war to fail so completely. His answer: the soldiers' sins caused the defeat. It blamed the soldiers. It protected the leaders and the institution that sent them.",
   personas: [
     {
       name: "Louis VII of France", role: "King of France", type: "Historical", sym: "⚜️",
       voice: '"I went as a king. I returned as a penitent."',
-      bio: "Louis was the deeply religious King of France who led his army into disaster in Anatolia (modern Turkey). His forces were caught in difficult mountain passes by Seljuq Turks and nearly destroyed. He returned home humiliated — and watched his marriage to Eleanor of Aquitaine fall apart in the aftermath. He never went on another Crusade.",
+      bio: "Louis was the deeply religious King of France who led his army into disaster in Anatolia (modern Turkey). His forces were caught in difficult mountain passes by Seljuq Turks and nearly destroyed. He returned home humiliated. His marriage to Eleanor of Aquitaine fell apart in the aftermath. He never went on another Crusade.",
       angle: "Piety and military talent are not the same thing. Explore how Louis's religious devotion shaped his tactical decisions — and how, when things went wrong, religious leaders immediately reframed the failure as a moral problem rather than a leadership one. Who benefits from that reframing? Which institutions are protected when a holy war's failure gets blamed on the sins of foot soldiers rather than the decisions of kings and popes?",
       unknowns: null,
       living: null,
       sources: [
         { label: "World History Encyclopedia: Second Crusade", url: "https://www.worldhistory.org/Second_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Odo of Deuil's firsthand account of the Second Crusade — he was Louis VII's chaplain and traveled with the army", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
+        { label: "Internet Medieval Sourcebook: Odo of Deuil's firsthand account — he was Louis VII's chaplain and traveled with the army", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
         { label: "Khan Academy: The Crusades — accessible background on the whole crusading movement", url: "https://www.khanacademy.org/humanities/world-history/medieval-times/crusades/a/the-crusades" }
       ]
     },
     {
       name: "Eleanor of Aquitaine", role: "Queen of France", type: "Historical", sym: "🏰",
       voice: '"They did not want my counsel. They should have."',
-      bio: "Eleanor was one of the most powerful political figures of the 12th century — a duchess in her own right before she became queen. She accompanied Louis on the Second Crusade, reportedly clashed with him repeatedly over strategy and judgment, and saw their marriage annulled two years after they returned home. She later married Henry II of England and remained a major political force for decades. She is also one of the most mythologized figures of the Middle Ages — more stories have been invented about her than almost any other medieval woman.",
-      angle: "Here is the challenge: Eleanor exists in the historical record almost entirely through what men wrote about her — and much of it is hostile, some of it almost certainly invented. How do you inhabit a historical figure when your primary sources are unreliable and biased? What obligation does a historian have when reconstructing a woman's voice from a period that almost never let women write for themselves? Then trace how Eleanor's image has traveled: from medieval slander, to 19th-century romance novels, to modern films. What does each version of Eleanor reveal about the era that produced it?",
+      bio: "Eleanor was one of the most powerful political people of the 12th century, a duchess in her own right before she became queen. She accompanied Louis on the Second Crusade, reportedly clashed with him repeatedly over strategy and judgment, and saw their marriage annulled two years after they returned home. She later married Henry II of England and remained a major political force for decades. She is also one of the most mythologized people of the Middle Ages. More stories have been invented about her than almost any other medieval woman.",
+      angle: "Here is the challenge: Eleanor exists in the historical record almost entirely through what men wrote about her, and much of it is hostile, some of it almost certainly invented. How do you inhabit a historical figure when your primary sources are unreliable and biased? What obligation does a historian have when reconstructing a woman's voice from a period that almost never let women write for themselves? Then trace how Eleanor's image has traveled: from medieval slander, to 19th-century romance novels, to modern films. What does each version of Eleanor reveal about the era that produced it?",
       unknowns: null,
       living: null,
       sources: [
@@ -570,7 +391,7 @@ const CRUSADES = [
       name: "Nur ad-Din", role: "Zengid Sultan of Syria", type: "Historical", sym: "🌙",
       voice: '"The sacred struggle is not won by the sword alone. It takes patience, and unity, and time."',
       bio: "Nur ad-Din was the Muslim ruler of Syria who used the Second Crusade's humiliating failure to consolidate his own political power. While the Crusaders were being routed in Anatolia and embarrassed outside Damascus, he was quietly unifying Muslim Syria under his banner. He was Saladin's mentor and patron. The Crusade's failure was his opening.",
-      angle: "Nur ad-Din is almost never the main character in Western Crusades curricula — but tell the Second Crusade as <em>his</em> story, and it looks completely different. He was a careful political operator who turned Latin military failure into Muslim political unity. Then ask: why has the Islamic perspective on the Crusades been so consistently sidelined in Western historical memory? What is lost — historically and humanly — when we only tell this story from one side?",
+      angle: "Nur ad-Din is almost never the main character in Western Crusades curricula. Tell the Second Crusade as <em>his</em> story and it looks completely different. He was a careful political operator who turned Latin military failure into Muslim political unity. Then ask: why has the Islamic perspective on the Crusades been so consistently sidelined in Western historical memory? What is lost, historically and humanly, when we only tell this story from one side?",
       unknowns: null,
       living: null,
       sources: [
@@ -582,19 +403,19 @@ const CRUSADES = [
   ]
 },
 
-// ── 3: THE THIRD CRUSADE ──────────────────────────────────────────────────────
+// ── 3: THIRD CRUSADE ──────────────────────────────────────────────────────────
 {
   id: 3, label: "Third Crusade", dates: "1187–1192",
   theme: "The Rivals", accent: "#6B4200",
   desc: "Two legendary commanders, one city, and a stalemate that both sides turned into myth almost immediately.",
-  consequence: "Jerusalem was not retaken. The Treaty of Jaffa allowed Christian pilgrims to visit the city but left it under Muslim control. Richard I left the Holy Land — and was captured by an Austrian duke on his way home and held for a massive ransom. Saladin died the following year.",
-  legacy: "Richard and Saladin were turned into heroic mirror images of each other almost immediately after the Crusade — brave, honorable warriors on opposite sides. That story served everyone: it made Christians feel good about losing, and it made Muslims feel good about their enemies' quality. The story also carefully buried the fact that Richard ordered the execution of 2,700 Muslim prisoners at a place called Ayyadieh. His own chroniclers recorded it.",
+  consequence: "Jerusalem was not retaken. The Treaty of Jaffa allowed Christian pilgrims to visit the city but left it under Muslim control. Richard I left the Holy Land, was captured by an Austrian duke on his way home, and was held for a massive ransom. Saladin died the following year.",
+  legacy: "Richard and Saladin were turned into heroic mirror images of each other almost immediately. Brave, honorable warriors on opposite sides. That story served everyone: it made Christians feel good about losing, and it made Muslims feel good about their enemies' quality. The story also buried the fact that Richard ordered the execution of 2,700 Muslim prisoners at a place called Ayyadieh. His own chroniclers recorded it.",
   personas: [
     {
       name: "Richard I of England", role: "The Lionheart", type: "Historical", sym: "🦁",
       voice: '"I came for Jerusalem. I leave knowing I could not take it."',
-      bio: "Richard I — called the Lionheart — is one of England's most famous kings. He was a brilliant battlefield commander who won nearly every fight against Saladin and still failed to retake Jerusalem. He spent less than six months of his entire ten-year reign actually in England. He ordered the execution of 2,700 Muslim prisoners at Ayyadieh. His own royal chroniclers wrote about it.",
-      angle: "The massacre at Ayyadieh is well-documented — Richard's own people recorded it. Yet the 'Lionheart' has been a romantic hero in English popular culture for 800 years. How has Richard been selectively remembered? What has the myth left out, and who has benefited from that selective memory across eight centuries? Present the Third Crusade from inside Richard's perspective — then account for what his legend has done to historical truth.",
+      bio: "Richard I, called the Lionheart, is one of England's most famous kings. He was a brilliant battlefield commander who won nearly every fight against Saladin and still failed to retake Jerusalem. He spent less than six months of his entire ten-year reign actually in England. He ordered the execution of 2,700 Muslim prisoners at Ayyadieh. His own royal chroniclers wrote about it.",
+      angle: "The massacre at Ayyadieh is well-documented. Richard's own people recorded it. Yet the &lsquo;Lionheart&rsquo; has been a romantic hero in English popular culture for 800 years. What has the myth left out? Who has benefited from that selective memory across eight centuries? Present the Third Crusade from inside Richard's perspective, then account for what his legend has done to historical truth.",
       unknowns: null,
       living: null,
       sources: [
@@ -606,8 +427,8 @@ const CRUSADES = [
     {
       name: "Saladin", role: "Sultan of Egypt and Syria", type: "Historical", sym: "🌙",
       voice: '"Mercy is not weakness. It is what separates us from what we are fighting against."',
-      bio: "Saladin — full name Salah ad-Din Yusuf ibn Ayyub — was the founder of the Ayyubid dynasty who retook Jerusalem in 1187. When he captured the city, he spared its inhabitants, in stark contrast to the Crusader massacre of 1099. He was Kurdish, not Arab, and led a coalition that was often fractious and divided. He died nearly bankrupt from his military campaigns. He is perhaps the most mythologized person in all of Crusading history — by <em>both</em> sides.",
-      angle: "Saladin has been claimed by Arab nationalists, by Islamic revival movements, by secular pan-Arab modernizers, and by Western writers looking for a 'noble Muslim' who makes the Crusades more comfortable to teach. Each era has invented the Saladin it needed. Your job is to find the historical Saladin — and then to examine every political project that has claimed him since. Is there a version of Saladin that doesn't belong to a modern agenda?",
+      bio: "Saladin, full name Salah ad-Din Yusuf ibn Ayyub, was the founder of the Ayyubid dynasty who retook Jerusalem in 1187. When he captured the city, he spared its inhabitants, in stark contrast to the Crusader massacre of 1099. He was Kurdish, not Arab, and led a coalition that was often fractious and divided. He died nearly bankrupt from his military campaigns. He is perhaps the most mythologized person in all of Crusading history. By both sides.",
+      angle: "Saladin has been claimed by Arab nationalists, by Islamic revival movements, by secular pan-Arab modernizers, and by Western writers looking for a &lsquo;noble Muslim&rsquo; who makes the Crusades more comfortable to teach. Each era invented the Saladin it needed. Your job is to find the historical Saladin, then examine every political project that has claimed him since. Is there a version of Saladin that doesn't belong to a modern agenda?",
       unknowns: null,
       living: null,
       sources: [
@@ -619,8 +440,8 @@ const CRUSADES = [
     {
       name: "Philip II of France", role: "King of France", type: "Historical", sym: "⚜️",
       voice: '"Richard gets the glory. I do the governing. We will see who ends up with more."',
-      bio: "Philip II arrived at Acre, helped capture it — and then sailed home, leaving Richard to continue the Crusade alone. He returned to France and immediately began scheming against Richard's French territories, taking advantage of Richard's absence and later his imprisonment. Philip is considered one of the most successful kings in French history. Almost everything he's celebrated for happened after he abandoned the Crusade.",
-      angle: "Philip is the cold realist of the Third Crusade: national self-interest over religious duty. The most strategically successful participant in the Crusade was the person who left early. What does that tell us about what the Crusades were actually about by this point? Then: Philip has been mostly forgotten in the romantic story of Richard vs. Saladin. Why? What does his erasure from the popular version of this Crusade reveal about which stories we choose to tell?",
+      bio: "Philip II arrived at Acre, helped capture it, and then sailed home, leaving Richard to continue the Crusade alone. He returned to France and immediately began scheming against Richard's French territories, taking advantage of Richard's absence and later his imprisonment. Philip is considered one of the most successful kings in French history. Almost everything he's celebrated for happened after he abandoned the Crusade.",
+      angle: "Philip is the cold realist of the Third Crusade: national self-interest over religious duty. The most strategically successful participant was the person who left early. What does that tell us about what the Crusades were actually about by this point? Philip has been mostly forgotten in the romantic story of Richard vs. Saladin. Why? What does his erasure from the popular version of this Crusade reveal about which stories we choose to tell?",
       unknowns: null,
       living: null,
       sources: [
@@ -632,47 +453,47 @@ const CRUSADES = [
   ]
 },
 
-// ── 4: THE FOURTH CRUSADE ─────────────────────────────────────────────────────
+// ── 4: FOURTH CRUSADE ────────────────────────────────────────────────────────
 {
   id: 4, label: "Fourth Crusade", dates: "1202–1204",
   theme: "The Betrayers", accent: "#7A1010",
-  desc: "A Crusade that never reached the Holy Land — and sacked a Christian city instead. The objects it looted are still in European museums.",
-  consequence: "Constantinople — the capital of the Byzantine (Eastern Roman) Empire and one of the largest, most sophisticated cities in the world — was sacked, looted, and burned. The Byzantine Empire was shattered into smaller states. The Eastern and Western Christian churches, already in schism since 1054, were pushed even further apart.",
-  legacy: "The Fourth Crusade is a live wound in Orthodox Christian memory. Pope John Paul II formally apologized for it in 2004 — eight hundred years later. The Greek government has repeatedly requested the return of objects taken to Venice. Most of those objects are still there.",
+  desc: "A Crusade that never reached the Holy Land, and sacked a Christian city instead. The objects it looted are still in European museums.",
+  consequence: "Constantinople, the capital of the Byzantine Empire and one of the largest, most sophisticated cities in the world, was sacked, looted, and burned. The Byzantine Empire was shattered into smaller states. The Eastern and Western Christian churches, already in schism since 1054, were pushed even further apart.",
+  legacy: "The Fourth Crusade is a live wound in Orthodox Christian memory. Pope John Paul II formally apologized for it in 2004, eight hundred years later. The Greek government has repeatedly requested the return of objects taken to Venice. Most of those objects are still there.",
   personas: [
     {
       name: "Enrico Dandolo", role: "Doge of Venice", type: "Historical", sym: "⚓",
       voice: '"I am ninety years old and reportedly blind. Yet I led the charge over their walls."',
-      bio: "Dandolo was the Doge — the elected ruler — of Venice. He was ancient and reportedly nearly blind. He financed the Fourth Crusade when the Crusaders couldn't pay their bills, and then used that financial leverage to redirect the entire campaign: first to Zara (a Christian city Venice had a trade dispute with), then to Constantinople. He led the final assault on Constantinople personally from the prow of his galley.",
-      angle: "The Fourth Crusade is the clearest example in the crusading era of a religious project hijacked by economic power. Was Dandolo a cynical manipulator, or a skilled statesman protecting his republic's interests? Make the case honestly. Then: four bronze horses looted from Constantinople's Hippodrome racetrack now sit above the entrance to St. Mark's Basilica in Venice. Research where they came from, when they arrived, and what the debate about them looks like today. What do we do with art that was stolen 800 years ago?",
+      bio: "Dandolo was the Doge, the elected ruler, of Venice. He was ancient and reportedly nearly blind. He financed the Fourth Crusade when the Crusaders couldn't pay their bills, then used that financial leverage to redirect the entire campaign: first to Zara (a Christian city Venice had a trade dispute with), then to Constantinople. He led the final assault on Constantinople personally from the prow of his galley.",
+      angle: "The Fourth Crusade is the clearest example in the crusading era of a religious project hijacked by economic power. Was Dandolo a cynical manipulator, or a skilled statesman protecting his republic's interests? Make the case honestly. Then: four bronze horses looted from Constantinople's Hippodrome racetrack now sit above the entrance to St. Mark's Basilica in Venice. Research where they came from, when they arrived, and what the debate looks like today. What do we do with art that was stolen 800 years ago?",
       unknowns: null,
-      living: "The four bronze horses of the Hippodrome, looted in 1204, are today displayed at St. Mark's Basilica in Venice. The Greek government has formally requested their return. The Greek Orthodox Patriarchate — the heir to the church Dandolo's forces looted — still operates in Istanbul today, under significant legal restrictions imposed by the Turkish government.",
+      living: "The four bronze horses of the Hippodrome, looted in 1204, are today displayed at St. Mark's Basilica in Venice. The Greek government has formally requested their return. The Greek Orthodox Patriarchate, the heir to the church Dandolo's forces looted, still operates in Istanbul today, under significant legal restrictions imposed by the Turkish government.",
       sources: [
         { label: "World History Encyclopedia: Enrico Dandolo", url: "https://www.worldhistory.org/Enrico_Dandolo/" },
         { label: "World History Encyclopedia: Fourth Crusade", url: "https://www.worldhistory.org/Fourth_Crusade/" },
-        { label: "The Metropolitan Museum of Art: The Crusades and medieval art — includes Byzantine objects displaced by the Fourth Crusade", url: "https://www.metmuseum.org/toah/hd/crus/hd_crus.htm" }
+        { label: "The Metropolitan Museum of Art: Byzantine art and the Crusades — includes objects displaced by the Fourth Crusade", url: "https://www.metmuseum.org/toah/hd/crus/hd_crus.htm" }
       ]
     },
     {
       name: "Alexios IV Angelos", role: "Byzantine Prince", type: "Historical", sym: "👑",
       voice: '"I invited wolves to guard the sheep. The sheep were me."',
-      bio: "Alexios was a Byzantine prince whose father had been overthrown and imprisoned. He approached the Crusaders with a proposition: help me take back my father's throne, and I'll reward you with gold, military support, and even a reunion of the Eastern and Western churches. The Crusaders accepted. Alexios got his throne. He couldn't deliver any of his promises. His own people overthrew him, and he was strangled in prison.",
-      angle: "Alexios made promises he couldn't keep and paid with his life — and with one of the greatest cities in the world. Trace the gap between what he promised and what was actually possible. How much responsibility does he bear for the catastrophe that followed? How do Byzantine Greek historians assess him differently from Western European sources? And what does his story reveal about the political fragility of the Byzantine Empire at this moment?",
+      bio: "Alexios was a Byzantine prince whose father had been overthrown and imprisoned. He approached the Crusaders with a deal: help me take back my father's throne, and I'll reward you with gold, military support, and even a reunion of the Eastern and Western churches. The Crusaders accepted. Alexios got his throne. He couldn't deliver any of his promises. His own people overthrew him. He was strangled in prison.",
+      angle: "Alexios made promises he couldn't keep and paid with his life, and with one of the greatest cities in the world. Trace the gap between what he promised and what was actually possible. How much responsibility does he bear for the catastrophe that followed? How do Byzantine Greek historians assess him differently from Western European sources? And what does his story reveal about the political fragility of the Byzantine Empire at this moment?",
       unknowns: null,
       living: null,
       sources: [
         { label: "World History Encyclopedia: Fourth Crusade — Alexios IV's role is covered in detail", url: "https://www.worldhistory.org/Fourth_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Geoffrey de Villehardouin's eyewitness chronicle of the Fourth Crusade — he was a Crusader leader who was there", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
+        { label: "Internet Medieval Sourcebook: Geoffrey de Villehardouin's eyewitness chronicle — he was a Crusader leader who was there", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
         { label: "Internet Medieval Sourcebook: Niketas Choniates's Byzantine account — he watched Constantinople burn and fled the city", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
       name: "Euphrosyne Doukaina Kamatera", role: "Byzantine Noblewoman", type: "Historical Reconstruction", sym: "🏛️",
       voice: '"They called themselves soldiers of Christ as they put our icons to the torch."',
-      bio: "This character is a composite — built from the account of Niketas Choniates, a Byzantine official who fled Constantinople during the sack and wrote a chronicle of what he witnessed. His account describes libraries burned, sacred icons melted down for their silver, the Hagia Sophia desecrated, and civilians killed. Niketas Choniates wrote that the armies of Islam had treated Constantinople with more humanity than its fellow Christians.",
-      angle: "Tell the sack of Constantinople not as background to the Crusaders' story — but as the story itself, seen by the people who lost everything. Niketas Choniates's comparison between the Crusaders and Muslim armies is one of the most striking statements of the entire Crusading era. What does it mean, and what does it ask us to think about religious violence? Then: trace what has happened to Constantinople's legacy since — the conversion of the Hagia Sophia, the debate over stolen art, the ongoing tension between Greek and Turkish claims.",
-      unknowns: "Byzantine women left almost no firsthand accounts of the sack. Niketas Choniates — our best source — mentions women in his chronicle primarily as victims of violence, almost never as speaking subjects with their own perspective. Your character must be built from the margins of his testimony, and your presentation should name that limitation clearly. The absence of ordinary Byzantine voices in the historical record is itself a fact worth examining.",
-      living: "The Hagia Sophia — built by the Emperor Justinian in 537, converted to a mosque after the Ottoman conquest in 1453, made a secular museum in 1934 — was reconverted to an active mosque by the Turkish government in 2020. Its status remains internationally contested. Thousands of objects from Constantinople's churches remain in Western European museum collections today.",
+      bio: "This character is a composite, built from the account of Niketas Choniates, a Byzantine official who fled Constantinople during the sack and wrote a chronicle of what he witnessed. His account describes libraries burned, sacred icons melted down for their silver, the Hagia Sophia desecrated, and civilians killed. Niketas Choniates wrote that the armies of Islam had treated Constantinople with more humanity than its fellow Christians.",
+      angle: "Tell the sack of Constantinople not as background to the Crusaders' story. It is the story itself, seen by the people who lost everything. Niketas Choniates's comparison between the Crusaders and Muslim armies is one of the most striking statements of the entire Crusading era. What does it mean? What does it ask us to think about religious violence? Then trace what has happened to Constantinople's legacy since: the conversion of the Hagia Sophia, the debate over stolen art, the ongoing tension between Greek and Turkish claims.",
+      unknowns: "Byzantine women left almost no firsthand accounts of the sack. Niketas Choniates, our best source, mentions women in his chronicle primarily as victims of violence, almost never as speaking subjects with their own perspective. Your character must be built from the margins of his testimony, and your presentation should name that limitation clearly. The absence of ordinary Byzantine voices in the historical record is itself a fact worth examining.",
+      living: "The Hagia Sophia, built by the Emperor Justinian in 537, converted to a mosque after the Ottoman conquest in 1453, made a secular museum in 1934, was reconverted to an active mosque by the Turkish government in 2020. Its status remains internationally contested. Thousands of objects from Constantinople's churches remain in Western European museum collections today.",
       sources: [
         { label: "World History Encyclopedia: The Sack of Constantinople (1204)", url: "https://www.worldhistory.org/Sack_of_Constantinople_(1204)/" },
         { label: "Internet Medieval Sourcebook: Niketas Choniates — the key primary source for what Constantinople looked like from the inside", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
@@ -682,31 +503,31 @@ const CRUSADES = [
   ]
 },
 
-// ── 5: THE FIFTH CRUSADE ──────────────────────────────────────────────────────
+// ── 5: FIFTH CRUSADE ──────────────────────────────────────────────────────────
 {
   id: 5, label: "Fifth Crusade", dates: "1213–1221",
   theme: "The Faithful", accent: "#1A5E2A",
-  desc: "An offer of Jerusalem was made — and refused. What happened next was predictable.",
-  consequence: "The Crusading army, trapped in Egypt by the flooding of the Nile River, surrendered. The remarkable peace offer — Jerusalem in exchange for leaving Egypt — had been rejected by the papal legate in charge, and was no longer on the table. The Holy Land remained in Muslim hands.",
+  desc: "An offer of Jerusalem was made and refused. What happened next was entirely predictable.",
+  consequence: "The Crusading army, trapped in Egypt by the flooding of the Nile River, surrendered. The remarkable peace offer — Jerusalem in exchange for leaving Egypt — had been rejected by the papal legate in charge, and was no longer available. The Holy Land stayed in Muslim hands.",
   legacy: "Contemporary observers on both sides were bewildered by the rejection of Al-Kamil's peace offer. It made one thing unmistakably clear: the Crusades were never <em>only</em> about Jerusalem. They were also about who had the authority to make decisions, what peace with Muslims was permitted to mean, and the complicated politics of the Catholic Church.",
   personas: [
     {
       name: "Cardinal Pelagius of Albano", role: "Papal Legate", type: "Historical", sym: "✝️",
       voice: '"I answer to God. These kings answer to me."',
-      bio: "Pelagius was the Pope's official representative — called a <em>legate</em> — on the Fifth Crusade. He was a trained canon lawyer (an expert in church law), not a military commander. He held authority over the entire expedition by the Pope's decree, which meant that even experienced military leaders had to defer to his decisions. He rejected Sultan Al-Kamil's offer to return Jerusalem in exchange for the Crusaders leaving Egypt.",
-      angle: "Pelagius represents something important and uncomfortable: absolute religious certainty overruling practical judgment — or, from his own perspective, faithfulness to God overruling compromise with what he saw as a test. Defend his decision from inside his worldview, then prosecute it from outside. How has he been used as a convenient scapegoat for what were actually much deeper failures? And what does the episode reveal about the dangers of putting a lawyer in command of an army?",
+      bio: "Pelagius was the Pope's official representative, called a <em>legate</em>, on the Fifth Crusade. He was a trained canon lawyer (an expert in church law), not a military commander. He held authority over the entire expedition by the Pope's decree, which meant that even experienced military leaders had to defer to his decisions. He rejected Sultan Al-Kamil's offer to return Jerusalem in exchange for the Crusaders leaving Egypt.",
+      angle: "Pelagius represents something important and uncomfortable: absolute religious certainty overruling practical judgment. Or, from his own perspective, faithfulness to God overruling compromise with what he saw as a test. Defend his decision from inside his worldview, then prosecute it from outside. How has he been used as a convenient scapegoat for what were actually much deeper failures? What does the episode reveal about the dangers of putting a lawyer in command of an army?",
       unknowns: null,
       living: null,
       sources: [
         { label: "World History Encyclopedia: Fifth Crusade — Pelagius's role is covered in detail", url: "https://www.worldhistory.org/Fifth_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Oliver of Paderborn's firsthand account of the Fifth Crusade — Oliver was a scholar-soldier who was there", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
-        { label: "World History Encyclopedia: The Crusades — broader context", url: "https://www.worldhistory.org/Crusades/" }
+        { label: "Internet Medieval Sourcebook: Oliver of Paderborn's firsthand account — Oliver was a scholar-soldier who was there", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
+        { label: "World History Encyclopedia: The Crusades — broader context for the whole movement", url: "https://www.worldhistory.org/Crusades/" }
       ]
     },
     {
       name: "Al-Kamil", role: "Ayyubid Sultan of Egypt", type: "Historical", sym: "🌙",
       voice: '"I offered them the city they came for. They refused. History will find this strange."',
-      bio: "Al-Kamil was Saladin's nephew and the Ayyubid Sultan of Egypt. He offered to hand Jerusalem back to the Crusaders — along with a 30-year truce — if they would simply leave Egypt. This offer astonished people on both sides. The papal legate rejected it. Seven years later, Al-Kamil made a similar offer to Frederick II and it worked.",
+      bio: "Al-Kamil was Saladin's nephew and the Ayyubid Sultan of Egypt. He offered to hand Jerusalem back to the Crusaders, along with a 30-year truce, if they would simply leave Egypt. This offer astonished people on both sides. The papal legate rejected it. Seven years later, Al-Kamil made a similar offer to Frederick II. It worked.",
       angle: "Al-Kamil is one of the most important figures in all of Crusading history precisely because he so thoroughly disrupts the idea of two sides locked in an unchangeable religious war. Present him honestly: a Muslim ruler who preferred negotiation to endless conflict. Then ask why that image has been systematically underemphasized in Western accounts of the Crusades. What assumptions about Islam does it challenge? What political work does the image of Muslims as uniformly war-seeking actually do in our own time?",
       unknowns: null,
       living: null,
@@ -719,10 +540,10 @@ const CRUSADES = [
     {
       name: "Francis of Assisi", role: "Friar", type: "Historical", sym: "🕊️",
       voice: '"I crossed their lines unarmed. I walked into the Sultan\'s tent. We talked for three days."',
-      bio: "Francis of Assisi — the man who founded the Franciscan order of monks — actually traveled to Egypt during the Fifth Crusade, crossed enemy lines without a weapon, and met personally with Sultan Al-Kamil. Both sides recorded this meeting. Francis was not killed. He came hoping to be martyred for his faith. He returned alive, reportedly moved by what he experienced.",
-      angle: "Francis's meeting with Al-Kamil has been claimed by many different groups across 800 years: advocates of interfaith dialogue, missionary movements hoping to convert non-Christians, modern peacemaking organizations. Examine how these different groups have used this encounter — and what the actual historical evidence supports. Then present the Fifth Crusade from Francis's extraordinary vantage point: a man of peace in a war who crossed every boundary and came back with something unexpected.",
+      bio: "Francis of Assisi, the man who founded the Franciscan order of monks, actually traveled to Egypt during the Fifth Crusade, crossed enemy lines without a weapon, and met personally with Sultan Al-Kamil. Both sides recorded this meeting. Francis was not killed. He came hoping to be martyred for his faith. He returned alive, reportedly moved by what he experienced.",
+      angle: "Francis's meeting with Al-Kamil has been claimed by many different groups across 800 years: advocates of interfaith dialogue, missionary movements hoping to convert non-Christians, modern peacemaking organizations. Examine how these different groups have used this encounter, and what the actual historical evidence supports. Then present the Fifth Crusade from Francis's extraordinary vantage point: a man of peace in a war who crossed every boundary and came back with something unexpected.",
       unknowns: null,
-      living: "The Franciscan Order, founded by Francis, still holds custody of many Christian holy sites in the Holy Land today — including the Church of the Nativity in Bethlehem and the Church of the Holy Sepulchre in Jerusalem. Which denomination administers which parts of which holy sites remains politically contentious.",
+      living: "The Franciscan Order, founded by Francis, still holds custody of many Christian holy sites in the Holy Land today, including the Church of the Nativity in Bethlehem and the Church of the Holy Sepulchre in Jerusalem. Which denomination administers which parts of which holy sites remains politically contentious.",
       sources: [
         { label: "World History Encyclopedia: Francis of Assisi", url: "https://www.worldhistory.org/Francis_of_Assisi/" },
         { label: "World History Encyclopedia: Fifth Crusade — includes the Francis–Al-Kamil encounter", url: "https://www.worldhistory.org/Fifth_Crusade/" },
@@ -732,19 +553,19 @@ const CRUSADES = [
   ]
 },
 
-// ── 6: THE SIXTH CRUSADE ──────────────────────────────────────────────────────
+// ── 6: SIXTH CRUSADE ──────────────────────────────────────────────────────────
 {
   id: 6, label: "Sixth Crusade", dates: "1228–1229",
   theme: "The Diplomats", accent: "#1A2C7E",
-  desc: "Jerusalem won without a single battle — by a man the Pope had declared spiritually dead — and celebrated by almost no one.",
-  consequence: "The Treaty of Jaffa returned Jerusalem, Bethlehem, and Nazareth to Christian control for ten years. The Dome of the Rock and the al-Aqsa Mosque — Islam's sacred sites in Jerusalem — remained in Muslim hands. Frederick II was under excommunication the entire time. Jerusalem's own Christian clergy refused to conduct any religious ceremonies while he was present.",
-  legacy: "The Sixth Crusade exposes how thoroughly the Crusading movement had become tangled up with European church politics. The Pope wanted Jerusalem back — but could not celebrate getting it this way. A success that satisfied no one, achieved by a man the Pope considered spiritually condemned.",
+  desc: "Jerusalem won without a single battle, by a man the Pope had declared spiritually dead, and celebrated by almost no one.",
+  consequence: "The Treaty of Jaffa returned Jerusalem, Bethlehem, and Nazareth to Christian control for ten years. The Dome of the Rock and the al-Aqsa Mosque, Islam's sacred sites in Jerusalem, remained in Muslim hands. Frederick II was under excommunication the entire time. Jerusalem's own Christian clergy refused to conduct any religious ceremonies while he was present.",
+  legacy: "The Sixth Crusade exposes how thoroughly the Crusading movement had become tangled up with European church politics. The Pope wanted Jerusalem back, but could not celebrate getting it this way. A success that satisfied no one, achieved by a man the Pope considered spiritually condemned.",
   personas: [
     {
       name: "Frederick II", role: "Holy Roman Emperor", type: "Historical", sym: "🦅",
       voice: '"I am excommunicated by the Pope. And I have just recovered Jerusalem."',
-      bio: "Frederick II was the Holy Roman Emperor — ruler of Germany and much of Italy — and one of the most remarkable figures of the Middle Ages. He spoke six languages including Arabic, corresponded with Muslim scientists and philosophers, kept a menagerie of exotic animals, and negotiated Jerusalem back from Sultan Al-Kamil through diplomacy alone, without a battle, while under papal excommunication — which meant the Church officially considered him spiritually dead.",
-      angle: "Frederick is arguably the strangest and most fascinating figure in all of Crusading history: a man condemned by the Pope who recovered the Pope's holy city using the tools of Islamic diplomacy. What does his success reveal about the contradictions at the heart of the Crusading project? Then trace how different eras have claimed Frederick: Enlightenment thinkers saw a rational modernist in him; 19th-century Italian nationalists made him a hero; later historians have reached different conclusions. What does each 'Frederick' reveal about the era that invented him?",
+      bio: "Frederick II was the Holy Roman Emperor, ruler of Germany and much of Italy, and one of the most remarkable people of the Middle Ages. He spoke six languages. Arabic was one of them. He corresponded with Muslim scientists and philosophers. He kept a menagerie of exotic animals. And he negotiated Jerusalem back from Sultan Al-Kamil through pure diplomacy, without a single battle, while the Church officially considered him spiritually dead.",
+      angle: "Frederick is arguably the strangest and most fascinating figure in all of Crusading history: a man condemned by the Pope who recovered the Pope's holy city using the tools of Islamic diplomacy. What does his success reveal about the contradictions at the heart of the Crusading project? Then trace how different eras have claimed Frederick: Enlightenment thinkers saw a rational modernist in him; 19th-century Italian nationalists made him a hero; later historians have reached different conclusions. What does each &lsquo;Frederick&rsquo; reveal about the era that invented him?",
       unknowns: null,
       living: null,
       sources: [
@@ -755,9 +576,9 @@ const CRUSADES = [
     },
     {
       name: "Al-Kamil", role: "Ayyubid Sultan of Egypt", type: "Historical", sym: "🌙",
-      voice: '"We share the city. Not because I was weak — because I was wise. My own people will not forgive me."',
-      bio: "This is the same Al-Kamil who offered Jerusalem to the Fifth Crusade — and was refused. Now, seven years later, facing political threats from his own relatives and needing a stable northern border, he agreed to hand over Jerusalem, Bethlehem, and Nazareth to Frederick II through the Treaty of Jaffa. He retained Islam's sacred sites in the city. His own subjects and much of the Muslim world considered this a betrayal.",
-      angle: "Al-Kamil's peace was experienced by many of his own people as a catastrophe — a religious humiliation done for political convenience. Your job is to defend the Treaty of Jaffa from inside his court, against the fierce objections of religious scholars and subjects who saw it as surrendering holy ground. This is the same man from the Fifth Crusade: a decade of experience has taught him things. What has it cost him to act on those lessons?",
+      voice: '"We share the city. Not because I was weak. Because I was wise. My own people will not forgive me."',
+      bio: "This is the same Al-Kamil who offered Jerusalem to the Fifth Crusade and was refused. Now, seven years later, facing political threats from his own relatives and needing a stable northern border, he agreed to hand over Jerusalem, Bethlehem, and Nazareth to Frederick II through the Treaty of Jaffa. He retained Islam's sacred sites in the city. His own subjects and much of the Muslim world considered this a betrayal.",
+      angle: "Al-Kamil's peace was experienced by many of his own people as a catastrophe, a religious humiliation done for political convenience. Your job is to defend the Treaty of Jaffa from inside his court, against the fierce objections of religious scholars and subjects who saw it as surrendering holy ground. This is the same man from the Fifth Crusade: a decade of experience has taught him things. What has it cost him to act on those lessons?",
       unknowns: null,
       living: null,
       sources: [
@@ -769,8 +590,8 @@ const CRUSADES = [
     {
       name: "Pope Gregory IX", role: "Pope", type: "Historical", sym: "⛪",
       voice: '"He has taken Jerusalem — and I cannot celebrate it."',
-      bio: "Pope Gregory IX was the man who excommunicated Frederick II — declaring him spiritually cut off from the Church. While Frederick was sailing to the Holy Land, Gregory launched a military campaign against Frederick's Italian territories. When the Treaty of Jaffa succeeded and Jerusalem was recovered, Gregory found himself in a position with no good options: the result he wanted, achieved by the person he'd condemned, using methods he couldn't sanction.",
-      angle: "Gregory's position is genuinely absurd: the holiest city in Christendom recovered by someone he declared spiritually dead, through negotiation with Muslims rather than miraculous battle. How does an institution respond when the outcome it wanted is delivered by the wrong person in the wrong way? How has the Church's role — in Crusade failures and in this peculiar success — been assessed across centuries? And what does Gregory's dilemma reveal about the gap between institutional religion and actual events in the world?",
+      bio: "Pope Gregory IX was the man who excommunicated Frederick II, declaring him spiritually cut off from the Church. While Frederick was sailing to the Holy Land, Gregory launched a military campaign against Frederick's Italian territories. When the Treaty of Jaffa succeeded and Jerusalem was recovered, Gregory found himself in a position with no good options: the result he wanted, achieved by the person he'd condemned, using methods he couldn't sanction.",
+      angle: "Gregory's position is genuinely absurd: the holiest city in Christendom recovered by someone he declared spiritually dead, through negotiation with Muslims rather than miraculous battle. How does an institution respond when the outcome it wanted is delivered by the wrong person in the wrong way? How has the Church's role, in Crusade failures and in this peculiar success, been assessed across centuries? What does Gregory's dilemma reveal about the gap between institutional religion and actual events in the world?",
       unknowns: null,
       living: null,
       sources: [
@@ -782,21 +603,21 @@ const CRUSADES = [
   ]
 },
 
-// ── 7: THE SEVENTH CRUSADE ────────────────────────────────────────────────────
+// ── 7: SEVENTH CRUSADE ───────────────────────────────────────────────────────
 {
   id: 7, label: "Seventh Crusade", dates: "1248–1254",
   theme: "The Captives", accent: "#6B3500",
   desc: "A saintly king captured, a woman who actually won, and a chronicler who wrote everything down.",
-  consequence: "King Louis IX of France was captured at the Battle of Fariskur along with most of his army. A massive ransom was paid. The Mamluks — an elite class of soldiers, originally enslaved warriors — who defeated him used the political momentum to seize control of Egypt from the Ayyubid dynasty. This reshaped the entire Islamic world.",
-  legacy: "Louis IX was declared a saint — canonized — in 1297, less than thirty years after his death. His Crusade failures were explained as spiritual tests, his suffering compared to Christ's. His most prized relic, believed to be Christ's crown of thorns, was purchased from a Byzantine emperor who had pledged it as loan collateral to Venetian merchants. The relics' connection to the looting of Constantinople is rarely mentioned when tourists visit the Sainte-Chapelle in Paris today.",
+  consequence: "King Louis IX of France was captured at the Battle of Fariskur along with most of his army. A massive ransom was paid. The Mamluks, an elite class of soldiers originally enslaved as warriors, used the political momentum to seize control of Egypt from the Ayyubid dynasty. This reshaped the entire Islamic world.",
+  legacy: "Louis IX was declared a saint in 1297, less than thirty years after his death. His Crusade failures were explained as spiritual tests, his suffering compared to Christ's. His most prized relic, believed to be Christ's crown of thorns, was purchased from a Byzantine emperor who had pledged it as loan collateral to Venetian merchants. The relic's connection to the looting of Constantinople is rarely mentioned when tourists visit the Sainte-Chapelle in Paris today.",
   personas: [
     {
       name: "Louis IX of France", role: "King of France", type: "Historical", sym: "⚜️",
       voice: '"God has humbled me. I accept this. But I will not stop."',
-      bio: "Louis IX was the most devout Crusader king in history — and he was later made a saint. He organized his campaign impressively, led it personally, suffered total military disaster at the Battle of Fariskur, was captured along with most of his army, paid an enormous ransom, and then — instead of going home — spent four more years in the Holy Land, rebuilding Crusader fortifications. He refused to leave.",
-      angle: "Louis's sainthood was built in part from his failures — his suffering read as spiritually meaningful in itself, like Christ's. How does a church turn military and political disaster into divine virtue? What does his canonization require historians to look past? Then ask: what does it mean for historical memory when a ruler is both a saint and repeatedly, catastrophically wrong? When holiness and competence pull in opposite directions, which matters more?",
+      bio: "Louis IX was the most devout Crusader king in history, and he was later made a saint. He organized his campaign impressively, led it personally, suffered total military disaster at the Battle of Fariskur, was captured along with most of his army, paid an enormous ransom, and then, instead of going home, spent four more years in the Holy Land rebuilding Crusader fortifications. He refused to leave.",
+      angle: "Louis's sainthood was built in part from his failures, his suffering read as spiritually meaningful in itself, like Christ's. How does a church turn military and political disaster into divine virtue? What does his canonization require historians to look past? Then ask: what does it mean for historical memory when a ruler is both a saint and repeatedly, catastrophically wrong? When holiness and competence pull in opposite directions, which matters more?",
       unknowns: null,
-      living: "The Sainte-Chapelle in Paris — built by Louis IX to house relics, some of which were purchased from objects displaced by the Fourth Crusade's sack of Constantinople — still stands and is one of the most-visited Gothic buildings in France. The crown of thorns relic is now in Notre-Dame Cathedral, currently being restored after the 2019 fire.",
+      living: "The Sainte-Chapelle in Paris, built by Louis IX to house relics, some of which were purchased from objects displaced by the Fourth Crusade's sack of Constantinople, still stands and is one of the most-visited Gothic buildings in France. The crown of thorns relic is now in Notre-Dame Cathedral, currently being restored after the 2019 fire.",
       sources: [
         { label: "World History Encyclopedia: Louis IX of France", url: "https://www.worldhistory.org/Louis_IX_of_France/" },
         { label: "World History Encyclopedia: Seventh Crusade", url: "https://www.worldhistory.org/Seventh_Crusade/" },
@@ -806,10 +627,10 @@ const CRUSADES = [
     {
       name: "Shajar al-Durr", role: "Ayyubid Queen / Mamluk Sultan", type: "Historical", sym: "👑",
       voice: '"My husband died. I ruled in secret. Then in the open. I did what had to be done."',
-      bio: "Shajar al-Durr was a former enslaved woman who had become the wife of the Ayyubid Sultan al-Salih. When her husband died during Louis IX's invasion, she concealed his death — forging his orders, directing the army in his name — to prevent panic. She commanded the defense of Egypt. She presided over the capture of Louis IX. She was then officially recognized as Sultan of Egypt in her own right, the first woman to hold that title in centuries. She issued coins with her name on them. She was murdered two years later.",
-      angle: "Shajar al-Durr won the Seventh Crusade. This is not a side story — she is the central figure of the entire event. Tell it as her story, not as background to Louis IX's failure. Then ask: she appears in almost no Western secondary school curriculum. Why? Her tomb is still in Cairo. Why do we know Richard the Lionheart's name and not hers? Who decides whose story gets told in history class — and what does that choice teach students about the past?",
+      bio: "Shajar al-Durr was a former enslaved woman who became the wife of the Ayyubid Sultan al-Salih. When her husband died during Louis IX's invasion, she concealed his death, forging his orders and directing the army in his name, to prevent panic. She commanded the defense of Egypt. She presided over the capture of Louis IX. She was then officially recognized as Sultan of Egypt in her own right, the first woman to hold that title in centuries. She issued coins with her name on them. She was murdered two years later.",
+      angle: "Shajar al-Durr won the Seventh Crusade. This is not a side story. She is the central figure of the entire event. Tell it as her story, not as background to Louis IX's failure. Then ask: she appears in almost no Western secondary school curriculum. Why? Her tomb is still in Cairo. Why do we know Richard the Lionheart's name and not hers? Who decides whose story gets told in history class? What does that choice teach students about the past?",
       unknowns: null,
-      living: "Shajar al-Durr's tomb still stands in Cairo. Her role in defeating the Seventh Crusade has been increasingly recognized by scholars since the late 20th century — but she remains largely absent from Western high school history courses.",
+      living: "Shajar al-Durr's tomb still stands in Cairo. Her role in defeating the Seventh Crusade has been increasingly recognized by scholars since the late 20th century, but she remains largely absent from Western high school history courses.",
       sources: [
         { label: "World History Encyclopedia: Shajar al-Durr", url: "https://www.worldhistory.org/Shajar_al-Durr/" },
         { label: "World History Encyclopedia: Mamluk Sultanate — the political structure that emerged from the Seventh Crusade's aftermath", url: "https://www.worldhistory.org/Mamluk_Sultanate/" },
@@ -817,10 +638,10 @@ const CRUSADES = [
       ]
     },
     {
-      name: "Jean de Joinville", role: "Chronicler & Royal Companion", type: "Historical", sym: "📜",
+      name: "Jean de Joinville", role: "Chronicler &amp; Royal Companion", type: "Historical", sym: "📜",
       voice: '"I have written it all down. Every indignity. Every miracle. Every meal. Every word the king said to me."',
-      bio: "Jean de Joinville was Louis IX's closest companion on the Seventh Crusade — a French nobleman who was captured alongside the king, ransomed alongside the king, and stayed in the Holy Land with him for years. Decades later, he wrote a detailed memoir of the entire experience. It is one of the most vivid firsthand accounts of medieval war, devotion, disaster, and daily life that has ever been written. He lived to be nearly one hundred.",
-      angle: "Joinville is the journalist of the Seventh Crusade — and also a deeply biased witness. He loved Louis IX, and he wrote his memoir partly to support Louis's case for sainthood. Examine what a primary source can and cannot show you: how does Joinville's personal loyalty shape what he sees, what he misses, and what he exaggerates? What would we know about the Seventh Crusade without him? And what might we know differently if we had equally detailed accounts from Egyptian or Mamluk voices?",
+      bio: "Jean de Joinville was Louis IX's closest companion on the Seventh Crusade, a French nobleman who was captured alongside the king, ransomed alongside the king, and stayed in the Holy Land with him for years. Decades later, he wrote a detailed memoir of the entire experience. It is one of the most vivid firsthand accounts of medieval war, devotion, disaster, and daily life ever written. He lived to be nearly one hundred.",
+      angle: "Joinville is the journalist of the Seventh Crusade, and also a deeply biased witness. He loved Louis IX, and he wrote his memoir partly to support Louis's case for sainthood. Examine what a primary source can and cannot show you: how does Joinville's personal loyalty shape what he sees, what he misses, and what he exaggerates? What would we know about the Seventh Crusade without him? What might we know differently if we had equally detailed accounts from Egyptian or Mamluk voices?",
       unknowns: null,
       living: null,
       sources: [
@@ -832,19 +653,19 @@ const CRUSADES = [
   ]
 },
 
-// ── 8: THE EIGHTH CRUSADE ─────────────────────────────────────────────────────
+// ── 8: EIGHTH CRUSADE ────────────────────────────────────────────────────────
 {
   id: 8, label: "Eighth Crusade", dates: "1270",
   theme: "The Dying", accent: "#5A2000",
-  desc: "A king who could not stop, a brother with other plans, and a plague that made the decision.",
-  consequence: "Louis IX died of disease outside Tunis before any significant fighting took place. His army disintegrated. His brother Charles negotiated a commercial treaty with Tunis that benefited Charles's Sicilian kingdom and had nothing to do with the Holy Land. The age of Crusade ended not with a dramatic battle, but with a king dying in a tent.",
-  legacy: "Louis IX was the last ruler who could genuinely summon the old coalition: royal prestige, papal authority, and popular enthusiasm together. After him, Crusading continued as rhetoric more than reality. His death became a kind of cultural marker — the moment many people privately began to suspect the age of Crusade was over.",
+  desc: "A king who could not stop, a brother with other plans, and a plague that made the decision for everyone.",
+  consequence: "Louis IX died of disease outside Tunis before any significant fighting took place. His army disintegrated. His brother Charles negotiated a commercial treaty with Tunis that benefited his Sicilian kingdom and had nothing to do with the Holy Land. The age of Crusade ended not with a dramatic battle, but with a king dying in a tent.",
+  legacy: "Louis IX was the last ruler who could genuinely summon the old coalition: royal prestige, papal authority, and popular enthusiasm together. After him, Crusading continued as rhetoric more than reality. His death became a kind of cultural marker, the moment many people privately began to suspect the age of Crusade was over.",
   personas: [
     {
       name: "Louis IX of France", role: "King of France — his final Crusade", type: "Historical", sym: "✝️",
       voice: '"My body fails me. My faith does not. Jerusalem is still waiting."',
-      bio: "This is Louis IX on his deathbed outside Tunis — redirected from his intended destination by his brother Charles's political maneuvering, dying of dysentery in the North African heat. His last word, reportedly, was 'Jerusalem.' He never came close to it on this campaign. He had already suffered catastrophic defeat and capture in the Seventh Crusade. He was canonized (declared a saint) twenty-seven years after his death.",
-      angle: "A man who organized his entire adult life around Crusade, dying in North Africa because his brother steered the campaign to serve commercial interests, whispering the name of the city he spent his life trying to reach and never did. How was Louis's death transformed into sainthood — and what did that transformation require historians and the Church to overlook? What does it mean when the exact qualities that make someone a saint also make them a repeatedly disastrous military leader?",
+      bio: "This is Louis IX on his deathbed outside Tunis, redirected from his intended destination by his brother Charles's political maneuvering, dying of dysentery in the North African heat. His last word, reportedly, was &lsquo;Jerusalem.&rsquo; He never came close to it on this campaign. He had already suffered catastrophic defeat and capture in the Seventh Crusade. He was canonized, declared a saint, twenty-seven years after his death.",
+      angle: "A man who organized his entire adult life around Crusade, dying in North Africa because his brother steered the campaign toward commercial interests, whispering the name of the city he spent his life trying to reach and never did. How was Louis's death transformed into sainthood? And what did that transformation require historians and the Church to overlook? What does it mean when the exact qualities that make someone a saint also make them a repeatedly disastrous military leader?",
       unknowns: null,
       living: null,
       sources: [
@@ -856,8 +677,8 @@ const CRUSADES = [
     {
       name: "Charles of Anjou", role: "King of Sicily", type: "Historical", sym: "⚜️",
       voice: '"My brother goes to God. I go to negotiate a treaty. History will judge us both."',
-      bio: "Charles was Louis IX's younger brother and the King of Sicily. He steered the Eighth Crusade toward Tunis — where he had his own commercial and political disputes with the local ruler — instead of toward Egypt or the Holy Land. After Louis died of disease, Charles negotiated terms with Tunis that were financially beneficial to his Sicilian kingdom. He then returned home having accomplished his actual goals.",
-      angle: "Charles weaponized his brother's holiness for political gain. The Eighth Crusade is a clear example of Crusade as geopolitical instrument: the religious language remains, but the actual goals are commercial and territorial. How transparent were people at the time about this gap? By 1270, was anyone still surprised? How have historians explained the growing distance between what the Crusades said they were and what they actually did? And what does the Eighth Crusade tell us about how movements lose their original purpose over time?",
+      bio: "Charles was Louis IX's younger brother and the King of Sicily. He steered the Eighth Crusade toward Tunis, where he had his own commercial and political disputes with the local ruler, instead of toward Egypt or the Holy Land. After Louis died of disease, Charles negotiated terms with Tunis that were financially beneficial to his Sicilian kingdom. He then returned home having accomplished his actual goals.",
+      angle: "Charles weaponized his brother's holiness for political gain. The Eighth Crusade is a clear case study of Crusade as geopolitical instrument: the religious language remains, but the actual goals are commercial and territorial. How transparent were people at the time about this gap? By 1270, was anyone still surprised? How have historians explained the growing distance between what the Crusades said they were and what they actually did? What does the Eighth Crusade tell us about how movements lose their original purpose over time?",
       unknowns: null,
       living: null,
       sources: [
@@ -869,8 +690,8 @@ const CRUSADES = [
     {
       name: "Muhammad I al-Mustansir", role: "Hafsid Ruler of Tunis", type: "Historical", sym: "🌙",
       voice: '"They came to my shores with crosses, and died of the heat. I waited."',
-      bio: "Al-Mustansir was the Hafsid ruler of Tunis (the Hafsid dynasty governed what is now Tunisia and parts of Algeria). The Crusading army arrived outside his walls, began dying of disease in the North African summer, and never mounted a serious military challenge. He never needed to take the field. After Louis IX died, he negotiated commercially favorable terms with Charles of Anjou.",
-      angle: "Al-Mustansir won the Eighth Crusade with patience and climate — his weapons were heat, logistics, and time. Present the Crusade from the perspective of someone who never needed to fight. Then ask: North African Islamic history is almost entirely absent from Western Crusades curricula, which overwhelmingly focus on Syria and Palestine. What is lost by treating these two centuries as a purely Middle Eastern story? What do Tunis, Cairo, and Damascus each offer that the Holy Land alone cannot?",
+      bio: "Al-Mustansir was the Hafsid ruler of Tunis, the Hafsid dynasty governing what is now Tunisia and parts of Algeria. The Crusading army arrived outside his walls, began dying of disease in the North African summer, and never mounted a serious military challenge. He never needed to take the field. After Louis IX died, he negotiated commercially favorable terms with Charles of Anjou.",
+      angle: "Al-Mustansir won the Eighth Crusade with patience and climate. His weapons were heat, logistics, and time. Present the Crusade from the perspective of someone who never needed to fight. Then ask: North African Islamic history is almost entirely absent from Western Crusades curricula, which overwhelmingly focus on Syria and Palestine. What is lost by treating these two centuries as a purely Middle Eastern story? What do Tunis, Cairo, and Damascus each offer that the Holy Land alone cannot?",
       unknowns: null,
       living: null,
       sources: [
@@ -882,19 +703,19 @@ const CRUSADES = [
   ]
 },
 
-// ── 9: THE NINTH CRUSADE ──────────────────────────────────────────────────────
+// ── 9: NINTH CRUSADE ─────────────────────────────────────────────────────────
 {
   id: 9, label: "Ninth Crusade", dates: "1271–1272",
   theme: "The Last", accent: "#2A2A2A",
   desc: "The end of an era — a future king who arrived too late, a sultan who was already winning, and the people the Crusades claimed to protect but never asked.",
-  consequence: "Edward I of England achieved almost nothing militarily and left when his father died. Baibars continued dismantling the remaining Crusader territories. In 1291 — twenty years later — the city of Acre, the last major Crusader stronghold in the Holy Land, fell to the Mamluks. The Crusader presence in the Holy Land was over.",
-  legacy: "The Ninth Crusade has no clean ending because the Crusading movement did not end cleanly. Crusading rhetoric continued for centuries: in Spain's Reconquista, in wars against the Ottomans, in the way Christopher Columbus framed his voyage to the Americas. When the Crusades 'ended' depends entirely on how you define them — a question still genuinely debated by historians today.",
+  consequence: "Edward I of England achieved almost nothing militarily and left when his father died. Baibars continued dismantling the remaining Crusader territories. In 1291, twenty years later, the city of Acre, the last major Crusader stronghold in the Holy Land, fell to the Mamluks. The Crusader presence in the Holy Land was over.",
+  legacy: "The Ninth Crusade has no clean ending because the Crusading movement did not end cleanly. Crusading rhetoric continued for centuries: in Spain's Reconquista, in wars against the Ottomans, in the way Christopher Columbus framed his voyage to the Americas. When the Crusades &lsquo;ended&rsquo; depends entirely on how you define them, a question still genuinely debated by historians today.",
   personas: [
     {
       name: "Edward I of England", role: "Prince Edward (the future king)", type: "Historical", sym: "⚔️",
       voice: '"I came with a thousand men. The world expected a miracle. I could not provide one."',
-      bio: "The future Edward I — later known as 'the Hammer of the Scots' for his brutal wars against Scotland — arrived in the Holy Land with a small force, accomplished almost nothing militarily, survived an assassination attempt (reportedly sent by Baibars), and left when news arrived that his father had died and he was now king of England. He spent his subsequent reign conquering Wales and Scotland.",
-      angle: "Edward represents the Crusading impulse outlasting its historical moment — continuing to fight for something that was structurally over. Explore how Crusading rhetoric survived failure in the Holy Land and was repurposed for different conquests back in Europe. How does the ideology Edward learned in the Holy Land connect to the wars he later waged in Britain? By 1271, what did 'holy war' actually mean — and who was it actually for?",
+      bio: "The future Edward I, later known as &lsquo;the Hammer of the Scots&rsquo; for his brutal wars against Scotland, arrived in the Holy Land with a small force, accomplished almost nothing militarily, survived an assassination attempt reportedly sent by Baibars, and left when news arrived that his father had died and he was now king of England. He spent his subsequent reign conquering Wales and Scotland.",
+      angle: "Edward represents the Crusading impulse outlasting its historical moment. He continued fighting for something that was structurally over. Explore how Crusading rhetoric survived failure in the Holy Land and was repurposed for different conquests back in Europe. How does the ideology Edward absorbed in the Holy Land connect to the wars he later waged in Britain? By 1271, what did &lsquo;holy war&rsquo; actually mean? And who was it actually for?",
       unknowns: null,
       living: null,
       sources: [
@@ -906,8 +727,8 @@ const CRUSADES = [
     {
       name: "Baibars", role: "Mamluk Sultan of Egypt and Syria", type: "Historical", sym: "🌙",
       voice: '"The Crusaders are a tide. I have lived long enough to watch tides go out."',
-      bio: "Baibars was originally an enslaved Cuman warrior (the Cumans were a Turkic people from the Eurasian steppes) who rose through the Mamluk military system to become the most powerful ruler in the Islamic world. He methodically dismantled the Crusader States, stopped the Mongol advance at the Battle of Ain Jalut in 1260 (one of the most consequential battles of the medieval era), survived everything the Ninth Crusade attempted, and sent an assassin to kill Edward I.",
-      angle: "Baibars understood that the Crusader States were structurally doomed — cut off from Europe, unable to expand, dependent on a slow trickle of reinforcements — and methodically finished the work. Tell the end of the Crusades not as the story of Crusader failure, but as the story of the construction of Mamluk power in the eastern Mediterranean. Then ask: Baibars stopped the Mongols at Ain Jalut — a battle that arguably changed the course of world history — and almost no Western curriculum covers it. Why not?",
+      bio: "Baibars was originally an enslaved Cuman warrior, the Cumans being a Turkic people from the Eurasian steppes, who rose through the Mamluk military system to become the most powerful ruler in the Islamic world. He methodically dismantled the Crusader States. He stopped the Mongol advance at the Battle of Ain Jalut in 1260, one of the most consequential battles of the medieval era. He survived everything the Ninth Crusade attempted. He sent an assassin to kill Edward I.",
+      angle: "Baibars understood that the Crusader States were structurally doomed: cut off from Europe, unable to expand, dependent on a slow trickle of reinforcements. He methodically finished the work. Tell the end of the Crusades not as the story of Crusader failure, but as the story of the construction of Mamluk power in the eastern Mediterranean. Then ask: Baibars stopped the Mongols at Ain Jalut, a battle that arguably changed the course of world history, and almost no Western curriculum covers it. Why not?",
       unknowns: null,
       living: null,
       sources: [
@@ -919,9 +740,9 @@ const CRUSADES = [
     {
       name: "Maryam of Acre", role: "Syrian Christian Merchant", type: "Historical Reconstruction", sym: "🌿",
       voice: '"My family has prayed in this city for five hundred years. Neither Crusaders nor Sultans asked what we wanted."',
-      bio: "This character is a composite — built from what we know of the native Christian communities of the Holy Land. These communities — Syrian Orthodox, Armenian, Maronite, Greek Orthodox, Coptic — had lived there continuously since late antiquity, long before the First Crusade arrived. They had their own bishops, their own liturgies, their own centuries-old relationships with their Muslim neighbors. They were the people the Crusades claimed to be liberating. They were almost never asked what they wanted.",
-      angle: "The Crusades were fought in the name of Eastern Christians who had their own survival strategies and political relationships the Latin Crusaders rarely understood or respected. Tell the end of the Crusading era from the perspective of someone for whom the Franks' departure was not simply a defeat — it was also a relief, a loss, and a complicated inheritance. Then research what happened to these communities after 1291. What does their story look like today?",
-      unknowns: "Native Christian women in the Crusader States left almost no firsthand written accounts. We know about their communities through church records, legal documents, and passing mentions in chronicles mostly written by men. The inner life of this community — their own understanding of the crusading project happening around and through them — is largely unrecoverable. Your character requires honest historical imagination, and your presentation should say so. The silence of ordinary people in the historical record is itself worth examining.",
+      bio: "This character is a composite, built from what we know of the native Christian communities of the Holy Land. These communities, Syrian Orthodox, Armenian, Maronite, Greek Orthodox, Coptic, had lived there continuously since late antiquity, long before the First Crusade arrived. They had their own bishops, their own liturgies, their own centuries-old relationships with their Muslim neighbors. They were the people the Crusades claimed to be liberating. They were almost never asked what they wanted.",
+      angle: "The Crusades were fought in the name of Eastern Christians who had their own survival strategies and political relationships the Latin Crusaders rarely understood or respected. Tell the end of the Crusading era from the perspective of someone for whom the Franks' departure was not simply a defeat. It was also a relief, a loss, and a complicated inheritance. Then research what happened to these communities after 1291. What does their story look like today?",
+      unknowns: "Native Christian women in the Crusader States left almost no firsthand written accounts. We know about their communities through church records, legal documents, and passing mentions in chronicles mostly written by men. The inner life of this community, their own understanding of the Crusading project happening around and through them, is largely unrecoverable. Your character requires honest historical imagination, and your presentation should say so. The silence of ordinary people in the historical record is itself worth examining.",
       living: "Syrian Orthodox, Armenian, Maronite, Greek Orthodox, and Coptic Christian communities remain present across the Middle East today. They are direct descendants of the communities the Crusades claimed to protect. In recent decades these communities have faced severe persecution, displacement, and violence in Syria, Iraq, and Egypt. Their situation receives almost no coverage in standard Crusades curricula, even though they are the living continuation of the story.",
       sources: [
         { label: "World History Encyclopedia: Crusader States — who actually lived in them, not just who ruled them", url: "https://www.worldhistory.org/Crusader_States/" },
@@ -937,9 +758,9 @@ const CRUSADES = [
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
 let state = {
-  phase:      'furniture', // 'furniture' | 'select' | 'personas'
-  fi:         0,           // furniture index
-  crusadeId:  null,
+  phase:       'furniture',
+  fi:          0,
+  crusadeId:   null,
   openPersona: null,
 };
 
@@ -947,28 +768,15 @@ let state = {
 // ─── UTILITIES ────────────────────────────────────────────────────────────────
 function $(id) { return document.getElementById(id); }
 
-function esc(s) {
-  return String(s)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
-}
-
 function render() {
   const app = $('app');
   app.innerHTML = '';
   const div = document.createElement('div');
   div.className = 'fade-in';
-  if (state.phase === 'furniture') {
-    div.innerHTML = buildFurniture();
-  } else if (state.phase === 'select') {
-    div.innerHTML = buildSelect();
-  } else {
-    div.innerHTML = buildPersonas();
-  }
+  if      (state.phase === 'furniture') div.innerHTML = buildFurniture();
+  else if (state.phase === 'select')    div.innerHTML = buildSelect();
+  else                                  div.innerHTML = buildPersonas();
   app.appendChild(div);
-  // Scroll to top on phase change
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -977,30 +785,21 @@ function navigate(phase, extra = {}) {
   render();
 }
 
-// Delegation handler
 document.addEventListener('click', function(e) {
   const el = e.target.closest('[data-action]');
   if (!el) return;
   const act = el.dataset.action;
 
-  if (act === 'next-furn') {
-    if (state.fi < FURNITURE.length - 1) { state.fi++; render(); }
-    else navigate('select');
-  } else if (act === 'prev-furn') {
-    if (state.fi > 0) { state.fi--; render(); }
-  } else if (act === 'skip-furn') {
-    navigate('select');
-  } else if (act === 'go-select') {
-    navigate('select', { openPersona: null });
-  } else if (act === 'go-furniture') {
-    navigate('furniture', { fi: 0 });
-  } else if (act === 'pick-crusade') {
-    navigate('personas', { crusadeId: parseInt(el.dataset.id), openPersona: null });
-  } else if (act === 'toggle-persona') {
+  if      (act === 'next-furn')      { if (state.fi < FURNITURE.length - 1) { state.fi++; render(); } else navigate('select'); }
+  else if (act === 'prev-furn')      { if (state.fi > 0) { state.fi--; render(); } }
+  else if (act === 'skip-furn')      navigate('select');
+  else if (act === 'go-select')      navigate('select', { openPersona: null });
+  else if (act === 'go-furniture')   navigate('furniture', { fi: 0 });
+  else if (act === 'pick-crusade')   navigate('personas', { crusadeId: parseInt(el.dataset.id), openPersona: null });
+  else if (act === 'toggle-persona') {
     const idx = parseInt(el.dataset.idx);
     state.openPersona = (state.openPersona === idx) ? null : idx;
     render();
-    // Try to keep card in view
     setTimeout(() => {
       const card = document.querySelector(`[data-persona="${idx}"]`);
       if (card) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1018,7 +817,7 @@ function buildFurniture() {
   ).join('');
 
   return `
-    <div class="center" style="margin-bottom:36px; padding-top:12px;">
+    <div class="center" style="margin-bottom:36px;padding-top:12px;">
       <div class="eyebrow">Timetraveler! Rearrange your</div>
       <h1 class="page-title">Mental Furniture!</h1>
       <p style="color:var(--muted);font-size:17px;font-style:italic;line-height:1.8;max-width:540px;margin:8px auto 0;">
@@ -1039,9 +838,7 @@ function buildFurniture() {
       <div class="dots">${dots}</div>
 
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;">
-        ${state.fi > 0
-          ? `<button class="btn" data-action="prev-furn">← Back</button>`
-          : ''}
+        ${state.fi > 0 ? `<button class="btn" data-action="prev-furn">← Back</button>` : ''}
         <button class="btn ${isLast ? 'btn-primary' : ''}" data-action="next-furn">
           ${isLast ? 'Enter the Chronicle →' : 'Next →'}
         </button>
@@ -1060,8 +857,7 @@ function buildFurniture() {
 // ─── BUILD: SELECT ────────────────────────────────────────────────────────────
 function buildSelect() {
   const cards = CRUSADES.map(c => `
-    <button class="crusade-btn" data-action="pick-crusade" data-id="${c.id}"
-      style="border-top-color:${c.accent};">
+    <button class="crusade-btn" data-action="pick-crusade" data-id="${c.id}">
       <div class="crusade-top-bar" style="background:${c.accent};"></div>
       <div class="crusade-label" style="color:${c.accent};">${c.label}</div>
       <div class="crusade-theme">${c.theme}</div>
@@ -1080,9 +876,7 @@ function buildSelect() {
         from inside it — and comment on the third, from your own character's point of view.
       </p>
     </div>
-
     <div class="crusade-grid">${cards}</div>
-
     <div class="center" style="margin-top:28px;">
       <button data-action="go-furniture" style="background:none;border:none;color:var(--faint);font-size:14px;font-family:inherit;text-decoration:underline;">
         ← Return to Mental Furniture
@@ -1096,7 +890,6 @@ function buildSelect() {
 function buildPersonas() {
   const c = CRUSADES.find(x => x.id === state.crusadeId);
   if (!c) return buildSelect();
-
   const personaItems = c.personas.map((p, i) => buildPersonaAccordion(p, i, c.accent)).join('');
 
   return `
@@ -1104,7 +897,6 @@ function buildPersonas() {
       <button class="btn btn-back" data-action="go-select">← All Crusades</button>
     </div>
 
-    <!-- Crusade Header -->
     <div style="margin-bottom:28px;">
       <div class="eyebrow" style="color:${c.accent};">${c.label} · ${c.dates}</div>
       <h2 class="section-title">${c.theme}</h2>
@@ -1119,7 +911,6 @@ function buildPersonas() {
       <div class="rule" style="background:linear-gradient(90deg,${c.accent},transparent);"></div>
     </div>
 
-    <!-- Pairing notice -->
     <div class="pairing-notice" style="background:${c.accent}18;border:1.5px solid ${c.accent}44;">
       <div style="font-size:26px;flex-shrink:0;">⚔️</div>
       <div>
@@ -1130,10 +921,8 @@ function buildPersonas() {
       </div>
     </div>
 
-    <!-- Persona accordion -->
     <div class="persona-list">${personaItems}</div>
 
-    <!-- Requirements -->
     <div class="req">
       <div class="req-icon">🗺️</div>
       <div>
@@ -1149,11 +938,10 @@ function buildPersonas() {
       </div>
     </div>
 
-    <!-- Further reading note -->
     <div class="callout" style="margin-top:20px;">
       <div class="callout-label" style="color:var(--blue);">For Further Reading</div>
       <div style="font-size:16px;color:var(--muted);line-height:1.8;">
-        Ada Palmer's essays at <a class="source-link" href="https://www.exurbe.com" target="_blank" rel="noopener">ExUrbe.com</a> explore how medieval people thought about their world — essential mental furniture for this project. Historians Matthew Gabriele and David Perry's book <em>The Bright Ages</em> (2021, available in most libraries) makes the case that the medieval world was far more complex, diverse, and connected than the myths suggest.
+        Ada Palmer's essays at <a class="source-link" href="https://www.exurbe.com" target="_blank" rel="noopener">ExUrbe.com</a> explore how medieval people thought about their world — essential mental furniture for this project. Historians Matthew Gabriele and David Perry's book <em>The Bright Ages</em> (2021, available in most libraries and as an audiobook) makes the case that the medieval world was far more complex, diverse, and connected than the myths suggest.
       </div>
     </div>
 
@@ -1167,7 +955,6 @@ function buildPersonaAccordion(p, i, accent) {
   const isOpen = state.openPersona === i;
   const tagClass = p.type === 'Historical' ? 'tag-hist' : 'tag-recon';
   const tagText  = p.type === 'Historical' ? 'Historical' : 'Historical Reconstruction';
-
   const body = isOpen ? buildPersonaBody(p, accent) : '';
 
   return `
@@ -1212,9 +999,7 @@ function buildPersonaBody(p, accent) {
 
   return `
     <div class="persona-body">
-      <div class="persona-voice" style="border-color:${accent};color:${accent};">
-        ${p.voice}
-      </div>
+      <div class="persona-voice" style="border-color:${accent};color:${accent};">${p.voice}</div>
       <div class="persona-bio">${p.bio}</div>
 
       <div class="colored-box" style="background:rgba(${hexToRgb(accent)},0.09);border:1px solid rgba(${hexToRgb(accent)},0.35);">
@@ -1227,13 +1012,15 @@ function buildPersonaBody(p, accent) {
 
       <div class="source-section">
         <div class="source-label">Start Here — Recommended Sources</div>
+        <div class="source-disclaimer">
+          ⚠️ These links lead to the best freely available academic sources we know of. Most go directly to the article you need. The <em>Internet Medieval Sourcebook</em> (Fordham) links all open the Crusades index — you'll need to scroll or use Ctrl+F to find your specific text. That digging is part of the research process. The Metropolitan Museum link may require some navigation within their collection browser. All links were verified as of early 2026.
+        </div>
         ${sourceItems}
       </div>
     </div>
   `;
 }
 
-// Hex color to rgb values for rgba() usage
 function hexToRgb(hex) {
   const clean = hex.replace('#','');
   const r = parseInt(clean.substring(0,2),16);
@@ -1242,8 +1029,6 @@ function hexToRgb(hex) {
   return `${r},${g},${b}`;
 }
 
-
-// ─── INIT ─────────────────────────────────────────────────────────────────────
 render();
 </script>
 </body>
