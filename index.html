@@ -453,23 +453,23 @@ document.head.appendChild(style);
 const FURNITURE = [
   {
     q: "What did medieval people think caused disease?",
-    a: "Bad air — called <em>miasma</em> — and God's punishment for sin. Not germs. Germ theory is still 600 years away. When a crusading army collapsed to dysentery outside Tunis in 1270, clergy explained it as God's judgment on the soldiers' sins. Keep this in mind whenever you see a medieval character react to sickness or defeat."
+    a: "Bad air, called <em>miasma</em>, and God's punishment for sin. Definitely not germs. Germ theory is still 600 years away. When a crusading army collapsed to dysentery outside Tunis in 1270, clergy explained it God had issued His judgment on the soldiers' sins. Keep this in mind whenever you see a medieval person react to sickness or defeat."
   },
   {
     q: "What <em>was</em> Jerusalem, in the way medieval people understood the world?",
-    a: "The literal center of everything. Medieval world maps — called <em>mappae mundi</em> — placed Jerusalem at the exact center of the earth. This wasn't poetry. People genuinely believed it was the point where heaven and earth were closest. Marching thousands of miles to reclaim it wasn't just politics. For many, it was the most important thing a human being could do."
+    a: "The literal center of everything. Medieval world maps, or <em>mappae mundi</em>, placed Jerusalem at the very center of the earth. This wasn't figurative. People literally believed it was the point where heaven and earth were closest. Marching thousands of miles to reclaim it was, for many believers, the most important thing a human being could do."
   },
   {
     q: "What happened when a medieval Christian received the Eucharist (communion)?",
-    a: "The bread and wine <em>physically became</em> the body and blood of Christ — this is called <em>transubstantiation</em>. It wasn't a symbol. It was considered as real as gravity. A crusading army that received communion before battle believed they were literally carrying God inside their bodies into combat. That changes how you understand their motivation."
+    a: "The sacramental bread and wine <em>physically became</em> the literal body and blood of Christ through a process called <em>transubstantiation</em>. This wasn't symbolic; it was a bonafide transformation. A crusading army that received communion before battle believed they were literally carrying God (inside their bodies) into combat. How does that change your understanding of their motivation"
   },
   {
-    q: "What was a relic — a fragment of a saint's bone or the True Cross?",
-    a: "Working technology. A bone of Saint Peter or a chip of the cross Jesus died on was believed to emit divine power: it could heal the sick, protect armies, and guarantee victory in battle. Kings spent the equivalent of millions to own relics. Armies carried them into combat. When the Crusaders captured Jerusalem, they found what they believed to be the True Cross. They carried it into their next battle."
+    q: "What was a relic: a fragment of a saint's bone or the True Cross?",
+    a: "Marvelous technology. A bone from Saint Peter or a chip of the cross Jesus died (the "True Cross") on was believed to emit divine power. Relics could heal the sick, protect armies, and guarantee victory in battle. Kings spent the equivalent of millions to own relics. Armies carried them into combat. When the Crusaders captured Jerusalem, they found what they believed to be the True Cross. They carried it into their next battle."
   },
   {
     q: "How did Arabic writers first describe the Crusaders?",
-    a: "Many early Arabic chronicles found the arriving Franks (their word for Western Europeans) barbaric, poorly educated, and baffling — not some terrifying enemy they'd always feared. Ibn Jubayr and Usama ibn Munqidh — two Muslim writers from this period — both described Frankish culture with a mix of horror and genuine curiosity. The idea of a single, centuries-long 'clash of civilizations' is mostly a story people later told about this period. The reality was messier and more human."
+    a: "Many early Arabic chronicles found the arriving Franks (their word for Western Europeans) barbaric, poorly educated, and baffling. They were yokels, backwater rubes, and foolish fundamentalists, not a terrifying enemy. Ibn Jubayr and Usama ibn Munqidh, two Muslim writers from this period, both described Frankish culture with a mix of horror and genuine curiosity. The idea of a single, centuries-long 'clash of civilizations' is a story later people told about this period. The reality was messier and more human."
   }
 ];
 
@@ -486,15 +486,15 @@ const CRUSADES = [
 {
   id: 1, label: "First Crusade", dates: "1095–1099",
   theme: "The Conquerors", accent: "#8B4500",
-  desc: "Those who launched the great march and took Jerusalem by storm — and whose violence echoed through every Crusade that followed.",
-  consequence: "Jerusalem was captured. Its Jewish and Muslim populations were massacred. The Crusaders set up Christian kingdoms across the Holy Land — called the Crusader States — that would last nearly two hundred years.",
+  desc: "Those who launched the great march and took Jerusalem by storm. Their violence echoed through every Crusade that followed.",
+  consequence: "Jerusalem was captured. Its Jewish and Muslim populations were massacred. The Crusaders set up Christian kingdoms across the Holy Land, called the Crusader States, that would last nearly two hundred years.",
   legacy: "The massacre of 1099 was recorded with celebration by Latin Christian writers and with grief and rage by Arabic ones. Those two traditions are still read against each other by historians today. Pope Urban II, who called the Crusade, died before he heard that Jerusalem had fallen.",
   personas: [
     {
       name: "Godfrey of Bouillon", role: "Crusader Commander", type: "Historical", sym: "⚔️",
-      voice: '"God wills it — and I have bled for it."',
-      bio: "Godfrey was a French duke who led the final assault on Jerusalem in 1099 and became the city's first Christian ruler. He refused the title 'King,' insisting he would only be called 'Advocate of the Holy Sepulchre' — guardian of the church built over Christ's tomb. He died the following year, probably from illness. His reputation was carefully polished by chroniclers who needed a perfect Crusade hero.",
-      angle: "Your job is to defend the brutal sack of Jerusalem as a sacred act — and then to examine that defense honestly. What does violence cost a Christian soul when it's done in God's name? Then go further: trace how Godfrey has been invoked since his death. Medieval chroniclers needed a hero. Nineteenth-century Belgian nationalists claimed him as their own. Contemporary far-right groups use his image online. What does each claim reveal about the person making it?",
+      voice: '"God wills it. I have bled for it."',
+      bio: "Godfrey was a French duke who led the final assault on Jerusalem in 1099 and became the city's first Christian ruler. He refused the title 'King,' insisting he would only be called 'Advocate of the Holy Sepulchre,' the guardian of the church built over Christ's tomb. He died the following year, probably from illness. His reputation was carefully polished by chroniclers who needed a perfect Crusade hero.",
+      angle: "Your job is to defend the brutal sack of Jerusalem as a sacred act and then to examine that defense. What does violence cost a Christian soul when it's done in God's name? Then go further: trace how Godfrey has been invoked since his death. Medieval chroniclers needed a hero. Nineteenth-century Belgian nationalists claimed him as their own. Contemporary far-right groups use his image online. What does each claim reveal about the person making it?",
       unknowns: null,
       living: null,
       sources: [
@@ -506,10 +506,10 @@ const CRUSADES = [
     {
       name: "Alexios I Komnenos", role: "Byzantine Emperor", type: "Historical", sym: "👑",
       voice: '"I asked for mercenaries. I received a storm."',
-      bio: "Alexios ruled the Byzantine Empire — the surviving eastern half of the old Roman Empire, based in Constantinople (modern Istanbul). When the Seljuq Turks threatened his borders, he sent a letter to the Pope asking for Western military help. He expected a few thousand hired soldiers. What arrived was a massive, uncontrollable army of religious zealots who had a very different idea of what they were there to do.",
-      angle: "The Byzantine Empire was <em>Orthodox</em> Christian, not Catholic. In 1054 — just forty years before the First Crusade — the Eastern and Western churches formally split in what's called the Great Schism. Alexios technically considered the Crusaders schismatics — members of a church he regarded as illegitimate. Explore what it felt like to invite that army into your capital. Then ask: how has Byzantine history been squeezed out of Western memory of the Crusades — and what do we miss by telling this story without Constantinople at its center?",
+      bio: "Alexios ruled the Byzantine Empire, which comprised the surviving eastern half of the old Roman Empire, from Constantinople (modern Istanbul). When the Seljuq Turks threatened his borders, he sent a letter to the Pope asking for Western military help. He expected a few thousand hired soldiers. What arrived was a massive, uncontrollable army of religious zealots who had a very different idea of what they were there to do.",
+      angle: "The Byzantine Empire was <em>Orthodox</em> Christian, not Catholic. In 1054, just forty years before the First Crusade, the Eastern and Western churches formally split in what's called the Great Schism. Alexios technically considered the Crusaders "schismatics," or members of a church he regarded as illegitimate. Explore what it felt like to invite that army into your capital. Then ask: how has Byzantine history been squeezed out of Western memory of the Crusades? What do we miss by telling this story without Constantinople at its center?",
       unknowns: null,
-      living: "The Greek Orthodox Patriarchate of Jerusalem — a direct descendant of the church Alexios was defending — still exists today. It administers Christian holy sites in Jerusalem and Bethlehem.",
+      living: "The Greek Orthodox Patriarchate of Jerusalem, a direct descendant of the church Alexios was defending, still exists today. It administers Christian holy sites in Jerusalem and Bethlehem.",
       sources: [
         { label: "World History Encyclopedia: Alexios I Komnenos", url: "https://www.worldhistory.org/Alexios_I_Komnenos/" },
         { label: "World History Encyclopedia: The Byzantine Empire — background on the civilization Alexios ruled", url: "https://www.worldhistory.org/Byzantine_Empire/" },
@@ -519,8 +519,8 @@ const CRUSADES = [
     {
       name: "Al-Afdal Shahanshah", role: "Fatimid Vizier of Egypt", type: "Historical", sym: "🌙",
       voice: '"I thought them a rabble. I was wrong."',
-      bio: "Al-Afdal was the Vizier of Egypt — the chief minister who ran the day-to-day government for the Fatimid Caliphate, a Shia Muslim dynasty that ruled Egypt. He had just retaken Jerusalem from the Seljuq Turks (a rival Muslim group) and expected the arriving Franks might be useful allies against his Sunni enemies. He badly misjudged their determination, their brutality, and their goal.",
-      angle: "Present the First Crusade from the side that lost Jerusalem. What intelligence failures and political assumptions let this happen? Then compare: Latin Christian chronicles describe the fall of Jerusalem as a glorious miracle. Arabic chronicles describe it as a catastrophe of mass murder. Both are firsthand accounts of the same events. Why do most Western textbooks use only one tradition — and what is lost when they do?",
+      bio: "Al-Afdal was the Vizier of Egypt, the chief minister who ran the day-to-day government for the Fatimid Caliphate, a Shia Muslim dynasty that ruled Egypt. He had just retaken Jerusalem from the Seljuq Turks (a rival Muslim group) and expected the arriving Franks might be useful allies against his Sunni enemies. He badly misjudged their determination, their brutality, and their goal.",
+      angle: "Present the First Crusade from the side that lost Jerusalem. What intelligence failures and political assumptions let this happen? Then compare: Latin Christian chronicles describe the fall of Jerusalem as a glorious miracle. Arabic chronicles describe it as a catastrophe of mass murder. Both are firsthand accounts of the same events. Why do most Western textbooks use only one tradition? What is lost when they do?",
       unknowns: null,
       living: null,
       sources: [
@@ -1019,11 +1019,11 @@ function buildFurniture() {
 
   return `
     <div class="center" style="margin-bottom:36px; padding-top:12px;">
-      <div class="eyebrow">Before You Choose a Voice</div>
-      <h1 class="page-title">Mental Furniture</h1>
+      <div class="eyebrow">Timetraveler! Rearrange your</div>
+      <h1 class="page-title">Mental Furniture!</h1>
       <p style="color:var(--muted);font-size:17px;font-style:italic;line-height:1.8;max-width:540px;margin:8px auto 0;">
-        The people in these documents did not think like we do.<br>
-        Before you speak in their voice, you need to furnish your mind with theirs.
+        The people we're about to meet did not think the way we do.<br>
+        Before you speak in their voice, rearrange your mind! Let's move some mental furniture.
       </p>
     </div>
 
