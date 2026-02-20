@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Voices of the Cross &amp; Crescent — Crusades Project</title>
+<title>Voices of the Cross &amp; Crescent | Crusades Project</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
@@ -260,7 +260,45 @@ h2.section-title {
 @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 .fade-in { animation: fadeIn 0.28s ease forwards; }
 
-/* ── Responsive ──────────────────────────────────────────────────────────── */
+/* ── Database cards ───────────────────────────────────────────────────────── */
+.db-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 20px 22px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.db-name {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.3px;
+}
+.db-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  flex: 1;
+}
+.db-link {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--blue);
+  text-decoration: none;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  margin-top: 4px;
+  transition: color 0.15s;
+}
+.db-link:hover { color: var(--red); }
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 600px) {
   #app { padding: 20px 14px 60px; }
   .persona-header { flex-wrap: wrap; gap: 10px; }
@@ -319,9 +357,8 @@ const CRUSADES = [
       unknowns: null,
       living: null,
       sources: [
-        { label: "World History Encyclopedia: Godfrey of Bouillon", url: "https://www.worldhistory.org/Godfrey_of_Bouillon/" },
-        { label: "World History Encyclopedia: First Crusade — the full story", url: "https://www.worldhistory.org/First_Crusade/" },
-        { label: "Internet Medieval Sourcebook (Fordham): Primary sources on the First Crusade — eyewitness chronicles from both sides", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "World History Encyclopedia: First Crusade", url: "https://www.worldhistory.org/First_Crusade/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including eyewitness chronicles from both the Latin and Arabic traditions", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -333,8 +370,8 @@ const CRUSADES = [
       living: "The Greek Orthodox Patriarchate of Jerusalem, a direct descendant of the church Alexios was defending, still exists today. It administers Christian holy sites in Jerusalem and Bethlehem.",
       sources: [
         { label: "World History Encyclopedia: Alexios I Komnenos", url: "https://www.worldhistory.org/Alexios_I_Komnenos/" },
-        { label: "World History Encyclopedia: The Byzantine Empire — background on the civilization Alexios ruled", url: "https://www.worldhistory.org/Byzantine_Empire/" },
-        { label: "Internet Medieval Sourcebook: Anna Comnena's <em>Alexiad</em> — Alexios's own daughter wrote a history of his reign, including the Crusade's arrival", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "World History Encyclopedia: Byzantine Empire", url: "https://www.worldhistory.org/Byzantine_Empire/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including Anna Comnena's <em>Alexiad</em>, written by Alexios's own daughter", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -345,9 +382,8 @@ const CRUSADES = [
       unknowns: null,
       living: null,
       sources: [
-        { label: "World History Encyclopedia: First Crusade — includes the Arabic and Fatimid perspective", url: "https://www.worldhistory.org/First_Crusade/" },
-        { label: "World History Encyclopedia: Fatimid Caliphate — who Al-Afdal worked for", url: "https://www.worldhistory.org/Fatimid_Caliphate/" },
-        { label: "Internet Medieval Sourcebook: Ibn al-Athir's Arabic chronicle of the First Crusade — the most important non-Crusader account", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "World History Encyclopedia: First Crusade", url: "https://www.worldhistory.org/First_Crusade/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including Ibn al-Athir's Arabic chronicle of the First Crusade", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     }
   ]
@@ -365,13 +401,12 @@ const CRUSADES = [
       name: "Louis VII of France", role: "King of France", type: "Historical", sym: "⚜️",
       voice: '"I went as a king. I returned as a penitent."',
       bio: "Louis was the deeply religious King of France who led his army into disaster in Anatolia (modern Turkey). His forces were caught in difficult mountain passes by Seljuq Turks and nearly destroyed. He returned home humiliated. His marriage to Eleanor of Aquitaine fell apart in the aftermath. He never went on another Crusade.",
-      angle: "Piety and military talent are not the same thing. Explore how Louis's religious devotion shaped his tactical decisions — and how, when things went wrong, religious leaders immediately reframed the failure as a moral problem rather than a leadership one. Who benefits from that reframing? Which institutions are protected when a holy war's failure gets blamed on the sins of foot soldiers rather than the decisions of kings and popes?",
+      angle: "Piety and military talent are not the same thing. Explore how Louis's religious devotion shaped his tactical decisions, and when things went wrong, religious leaders immediately reframed the failure as a moral problem rather than a leadership one. Who benefits from that reframing? Which institutions are protected when a holy war's failure gets blamed on the sins of foot soldiers rather than the decisions of kings and popes?",
       unknowns: null,
       living: null,
       sources: [
         { label: "World History Encyclopedia: Second Crusade", url: "https://www.worldhistory.org/Second_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Odo of Deuil's firsthand account — he was Louis VII's chaplain and traveled with the army", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
-        { label: "Khan Academy: The Crusades — accessible background on the whole crusading movement", url: "https://www.khanacademy.org/humanities/world-history/medieval-times/crusades/a/the-crusades" }
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including Odo of Deuil's firsthand account — he was Louis VII's chaplain", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -384,7 +419,7 @@ const CRUSADES = [
       sources: [
         { label: "World History Encyclopedia: Eleanor of Aquitaine", url: "https://www.worldhistory.org/Eleanor_of_Aquitaine/" },
         { label: "World History Encyclopedia: Second Crusade", url: "https://www.worldhistory.org/Second_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Sources on the Second Crusade and its key figures", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations on the Second Crusade", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -395,9 +430,8 @@ const CRUSADES = [
       unknowns: null,
       living: null,
       sources: [
-        { label: "World History Encyclopedia: Nur ad-Din", url: "https://www.worldhistory.org/Nur_ad-Din/" },
-        { label: "World History Encyclopedia: Zengid Dynasty — the political structure Nur ad-Din led", url: "https://www.worldhistory.org/Zengid_Dynasty/" },
-        { label: "World History Encyclopedia: Second Crusade", url: "https://www.worldhistory.org/Second_Crusade/" }
+        { label: "World History Encyclopedia: Second Crusade", url: "https://www.worldhistory.org/Second_Crusade/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations on the Second Crusade and the Muslim response", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     }
   ]
@@ -421,7 +455,7 @@ const CRUSADES = [
       sources: [
         { label: "World History Encyclopedia: Richard I of England", url: "https://www.worldhistory.org/Richard_I_of_England/" },
         { label: "World History Encyclopedia: Third Crusade", url: "https://www.worldhistory.org/Third_Crusade/" },
-        { label: "Internet Medieval Sourcebook: <em>Itinerarium Regis Ricardi</em> — an eyewitness chronicle of Richard's Crusade, including Ayyadieh", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including the <em>Itinerarium Regis Ricardi</em>, an eyewitness chronicle of Richard's campaign", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -433,8 +467,8 @@ const CRUSADES = [
       living: null,
       sources: [
         { label: "World History Encyclopedia: Saladin", url: "https://www.worldhistory.org/Saladin/" },
-        { label: "World History Encyclopedia: Ayyubid Dynasty — the political structure Saladin built", url: "https://www.worldhistory.org/Ayyubid_Dynasty/" },
-        { label: "Internet Medieval Sourcebook: Baha ad-Din ibn Shaddad's biography of Saladin — written by someone who knew him personally", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "World History Encyclopedia: Third Crusade", url: "https://www.worldhistory.org/Third_Crusade/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including Baha ad-Din ibn Shaddad's biography of Saladin, written by someone who knew him personally", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -445,9 +479,8 @@ const CRUSADES = [
       unknowns: null,
       living: null,
       sources: [
-        { label: "World History Encyclopedia: Philip II of France (Philip Augustus)", url: "https://www.worldhistory.org/Philip_II_of_France/" },
         { label: "World History Encyclopedia: Third Crusade", url: "https://www.worldhistory.org/Third_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Sources on the Third Crusade from multiple perspectives", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations on the Third Crusade from multiple perspectives", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     }
   ]
@@ -469,9 +502,8 @@ const CRUSADES = [
       unknowns: null,
       living: "The four bronze horses of the Hippodrome, looted in 1204, are today displayed at St. Mark's Basilica in Venice. The Greek government has formally requested their return. The Greek Orthodox Patriarchate, the heir to the church Dandolo's forces looted, still operates in Istanbul today, under significant legal restrictions imposed by the Turkish government.",
       sources: [
-        { label: "World History Encyclopedia: Enrico Dandolo", url: "https://www.worldhistory.org/Enrico_Dandolo/" },
         { label: "World History Encyclopedia: Fourth Crusade", url: "https://www.worldhistory.org/Fourth_Crusade/" },
-        { label: "The Metropolitan Museum of Art: Byzantine art and the Crusades — includes objects displaced by the Fourth Crusade", url: "https://www.metmuseum.org/toah/hd/crus/hd_crus.htm" }
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including Geoffrey de Villehardouin's eyewitness account — he was a Crusader leader present at the sack", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -482,9 +514,8 @@ const CRUSADES = [
       unknowns: null,
       living: null,
       sources: [
-        { label: "World History Encyclopedia: Fourth Crusade — Alexios IV's role is covered in detail", url: "https://www.worldhistory.org/Fourth_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Geoffrey de Villehardouin's eyewitness chronicle — he was a Crusader leader who was there", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
-        { label: "Internet Medieval Sourcebook: Niketas Choniates's Byzantine account — he watched Constantinople burn and fled the city", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "World History Encyclopedia: Fourth Crusade", url: "https://www.worldhistory.org/Fourth_Crusade/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including both Villehardouin's Latin account and Niketas Choniates's Byzantine account of the sack", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -495,9 +526,8 @@ const CRUSADES = [
       unknowns: "Byzantine women left almost no firsthand accounts of the sack. Niketas Choniates, our best source, mentions women in his chronicle primarily as victims of violence, almost never as speaking subjects with their own perspective. Your character must be built from the margins of his testimony, and your presentation should name that limitation clearly. The absence of ordinary Byzantine voices in the historical record is itself a fact worth examining.",
       living: "The Hagia Sophia, built by the Emperor Justinian in 537, converted to a mosque after the Ottoman conquest in 1453, made a secular museum in 1934, was reconverted to an active mosque by the Turkish government in 2020. Its status remains internationally contested. Thousands of objects from Constantinople's churches remain in Western European museum collections today.",
       sources: [
-        { label: "World History Encyclopedia: The Sack of Constantinople (1204)", url: "https://www.worldhistory.org/Sack_of_Constantinople_(1204)/" },
-        { label: "Internet Medieval Sourcebook: Niketas Choniates — the key primary source for what Constantinople looked like from the inside", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
-        { label: "The Metropolitan Museum of Art: Byzantine art — including objects displaced by the Fourth Crusade", url: "https://www.metmuseum.org/toah/hd/crus/hd_crus.htm" }
+        { label: "World History Encyclopedia: Fourth Crusade", url: "https://www.worldhistory.org/Fourth_Crusade/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including Niketas Choniates's Byzantine chronicle — the key source for what the sack looked like from inside the city", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     }
   ]
@@ -508,7 +538,7 @@ const CRUSADES = [
   id: 5, label: "Fifth Crusade", dates: "1213–1221",
   theme: "The Faithful", accent: "#1A5E2A",
   desc: "An offer of Jerusalem was made and refused. What happened next was entirely predictable.",
-  consequence: "The Crusading army, trapped in Egypt by the flooding of the Nile River, surrendered. The remarkable peace offer — Jerusalem in exchange for leaving Egypt — had been rejected by the papal legate in charge, and was no longer available. The Holy Land stayed in Muslim hands.",
+  consequence: "The Crusading army, trapped in Egypt by the flooding of the Nile River, surrendered. The remarkable peace offer (Jerusalem in exchange for leaving Egypt) had been rejected by the papal legate in charge, and was no longer available. The Holy Land stayed in Muslim hands.",
   legacy: "Contemporary observers on both sides were bewildered by the rejection of Al-Kamil's peace offer. It made one thing unmistakably clear: the Crusades were never <em>only</em> about Jerusalem. They were also about who had the authority to make decisions, what peace with Muslims was permitted to mean, and the complicated politics of the Catholic Church.",
   personas: [
     {
@@ -519,9 +549,9 @@ const CRUSADES = [
       unknowns: null,
       living: null,
       sources: [
-        { label: "World History Encyclopedia: Fifth Crusade — Pelagius's role is covered in detail", url: "https://www.worldhistory.org/Fifth_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Oliver of Paderborn's firsthand account — Oliver was a scholar-soldier who was there", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
-        { label: "World History Encyclopedia: The Crusades — broader context for the whole movement", url: "https://www.worldhistory.org/Crusades/" }
+        { label: "World History Encyclopedia: Fifth Crusade | Pelagius's role", url: "https://www.worldhistory.org/Fifth_Crusade/" },
+        { label: "Internet Medieval Sourcebook: Oliver of Paderborn's firsthand account | Oliver was a scholar-soldier who was there", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
+        { label: "World History Encyclopedia: The Crusades | broader context", url: "https://www.worldhistory.org/Crusades/" }
       ]
     },
     {
@@ -532,9 +562,8 @@ const CRUSADES = [
       unknowns: null,
       living: null,
       sources: [
-        { label: "World History Encyclopedia: Al-Kamil", url: "https://www.worldhistory.org/Al-Kamil/" },
         { label: "World History Encyclopedia: Fifth Crusade", url: "https://www.worldhistory.org/Fifth_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Arabic sources on the Fifth Crusade negotiations", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including Arabic sources on the Fifth Crusade negotiations", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -545,9 +574,8 @@ const CRUSADES = [
       unknowns: null,
       living: "The Franciscan Order, founded by Francis, still holds custody of many Christian holy sites in the Holy Land today, including the Church of the Nativity in Bethlehem and the Church of the Holy Sepulchre in Jerusalem. Which denomination administers which parts of which holy sites remains politically contentious.",
       sources: [
-        { label: "World History Encyclopedia: Francis of Assisi", url: "https://www.worldhistory.org/Francis_of_Assisi/" },
-        { label: "World History Encyclopedia: Fifth Crusade — includes the Francis–Al-Kamil encounter", url: "https://www.worldhistory.org/Fifth_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Early Franciscan sources and chronicles", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "World History Encyclopedia: Fifth Crusade", url: "https://www.worldhistory.org/Fifth_Crusade/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including early Franciscan sources on Francis's meeting with Sultan Al-Kamil", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     }
   ]
@@ -569,9 +597,9 @@ const CRUSADES = [
       unknowns: null,
       living: null,
       sources: [
-        { label: "World History Encyclopedia: Frederick II, Holy Roman Emperor", url: "https://www.worldhistory.org/Frederick_II/" },
+        { label: "World History Encyclopedia: Frederick II", url: "https://www.worldhistory.org/Frederick_II/" },
         { label: "World History Encyclopedia: Sixth Crusade", url: "https://www.worldhistory.org/Sixth_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Documents from the Sixth Crusade and the Treaty of Jaffa", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including documents from the Sixth Crusade and the Treaty of Jaffa", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -582,22 +610,21 @@ const CRUSADES = [
       unknowns: null,
       living: null,
       sources: [
-        { label: "World History Encyclopedia: Al-Kamil", url: "https://www.worldhistory.org/Al-Kamil/" },
-        { label: "World History Encyclopedia: Sixth Crusade and the Treaty of Jaffa", url: "https://www.worldhistory.org/Sixth_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Arabic sources on the Treaty of Jaffa and Muslim reaction to it", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "World History Encyclopedia: Sixth Crusade", url: "https://www.worldhistory.org/Sixth_Crusade/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including Arabic sources on the Treaty of Jaffa and Muslim reaction to it", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
       name: "Pope Gregory IX", role: "Pope", type: "Historical", sym: "⛪",
-      voice: '"He has taken Jerusalem — and I cannot celebrate it."',
+      voice: '"He has taken Jerusalem. I cannot celebrate it."',
       bio: "Pope Gregory IX was the man who excommunicated Frederick II, declaring him spiritually cut off from the Church. While Frederick was sailing to the Holy Land, Gregory launched a military campaign against Frederick's Italian territories. When the Treaty of Jaffa succeeded and Jerusalem was recovered, Gregory found himself in a position with no good options: the result he wanted, achieved by the person he'd condemned, using methods he couldn't sanction.",
       angle: "Gregory's position is genuinely absurd: the holiest city in Christendom recovered by someone he declared spiritually dead, through negotiation with Muslims rather than miraculous battle. How does an institution respond when the outcome it wanted is delivered by the wrong person in the wrong way? How has the Church's role, in Crusade failures and in this peculiar success, been assessed across centuries? What does Gregory's dilemma reveal about the gap between institutional religion and actual events in the world?",
       unknowns: null,
       living: null,
       sources: [
         { label: "World History Encyclopedia: Sixth Crusade", url: "https://www.worldhistory.org/Sixth_Crusade/" },
-        { label: "World History Encyclopedia: Frederick II — includes his conflict with Gregory IX", url: "https://www.worldhistory.org/Frederick_II/" },
-        { label: "Internet Medieval Sourcebook: Papal letters related to Frederick II and the Sixth Crusade", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "World History Encyclopedia: Frederick II", url: "https://www.worldhistory.org/Frederick_II/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including papal letters related to Frederick II and the Sixth Crusade", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     }
   ]
@@ -619,9 +646,8 @@ const CRUSADES = [
       unknowns: null,
       living: "The Sainte-Chapelle in Paris, built by Louis IX to house relics, some of which were purchased from objects displaced by the Fourth Crusade's sack of Constantinople, still stands and is one of the most-visited Gothic buildings in France. The crown of thorns relic is now in Notre-Dame Cathedral, currently being restored after the 2019 fire.",
       sources: [
-        { label: "World History Encyclopedia: Louis IX of France", url: "https://www.worldhistory.org/Louis_IX_of_France/" },
         { label: "World History Encyclopedia: Seventh Crusade", url: "https://www.worldhistory.org/Seventh_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Jean de Joinville's <em>Life of Saint Louis</em> — one of the most vivid firsthand accounts of any Crusade, written by Louis's close companion", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations, including Jean de Joinville's <em>Life of Saint Louis</em> — one of the most vivid firsthand accounts of any Crusade", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -632,8 +658,7 @@ const CRUSADES = [
       unknowns: null,
       living: "Shajar al-Durr's tomb still stands in Cairo. Her role in defeating the Seventh Crusade has been increasingly recognized by scholars since the late 20th century, but she remains largely absent from Western high school history courses.",
       sources: [
-        { label: "World History Encyclopedia: Shajar al-Durr", url: "https://www.worldhistory.org/Shajar_al-Durr/" },
-        { label: "World History Encyclopedia: Mamluk Sultanate — the political structure that emerged from the Seventh Crusade's aftermath", url: "https://www.worldhistory.org/Mamluk_Sultanate/" },
+        { label: "World History Encyclopedia: Shajara al-Durr", url: "https://www.worldhistory.org/Shajara_al-Durr/" },
         { label: "World History Encyclopedia: Seventh Crusade", url: "https://www.worldhistory.org/Seventh_Crusade/" }
       ]
     },
@@ -645,9 +670,8 @@ const CRUSADES = [
       unknowns: null,
       living: null,
       sources: [
-        { label: "Internet Medieval Sourcebook: Jean de Joinville, <em>Life of Saint Louis</em> — the full text in translation", url: "https://sourcebooks.fordham.edu/sbook1c.asp" },
         { label: "World History Encyclopedia: Seventh Crusade", url: "https://www.worldhistory.org/Seventh_Crusade/" },
-        { label: "World History Encyclopedia: Louis IX of France", url: "https://www.worldhistory.org/Louis_IX_of_France/" }
+        { label: "Internet Medieval Sourcebook (Fordham): Jean de Joinville's <em>Life of Saint Louis</em> in full translation — the primary source for the Seventh Crusade's human detail", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     }
   ]
@@ -662,16 +686,15 @@ const CRUSADES = [
   legacy: "Louis IX was the last ruler who could genuinely summon the old coalition: royal prestige, papal authority, and popular enthusiasm together. After him, Crusading continued as rhetoric more than reality. His death became a kind of cultural marker, the moment many people privately began to suspect the age of Crusade was over.",
   personas: [
     {
-      name: "Louis IX of France", role: "King of France — his final Crusade", type: "Historical", sym: "✝️",
+      name: "Louis IX of France", role: "King of France | his final Crusade", type: "Historical", sym: "✝️",
       voice: '"My body fails me. My faith does not. Jerusalem is still waiting."',
       bio: "This is Louis IX on his deathbed outside Tunis, redirected from his intended destination by his brother Charles's political maneuvering, dying of dysentery in the North African heat. His last word, reportedly, was &lsquo;Jerusalem.&rsquo; He never came close to it on this campaign. He had already suffered catastrophic defeat and capture in the Seventh Crusade. He was canonized, declared a saint, twenty-seven years after his death.",
       angle: "A man who organized his entire adult life around Crusade, dying in North Africa because his brother steered the campaign toward commercial interests, whispering the name of the city he spent his life trying to reach and never did. How was Louis's death transformed into sainthood? And what did that transformation require historians and the Church to overlook? What does it mean when the exact qualities that make someone a saint also make them a repeatedly disastrous military leader?",
       unknowns: null,
       living: null,
       sources: [
-        { label: "World History Encyclopedia: Louis IX of France", url: "https://www.worldhistory.org/Louis_IX_of_France/" },
         { label: "World History Encyclopedia: Eighth Crusade", url: "https://www.worldhistory.org/Eighth_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Sources on Louis IX's death and the Eighth Crusade", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations on the Eighth Crusade and Louis IX's death", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -683,8 +706,7 @@ const CRUSADES = [
       living: null,
       sources: [
         { label: "World History Encyclopedia: Eighth Crusade", url: "https://www.worldhistory.org/Eighth_Crusade/" },
-        { label: "World History Encyclopedia: Louis IX of France — the context for his relationship with Charles", url: "https://www.worldhistory.org/Louis_IX_of_France/" },
-        { label: "Internet Medieval Sourcebook: Sources on the Eighth Crusade and North Africa", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations on the Eighth Crusade and North Africa", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -696,8 +718,7 @@ const CRUSADES = [
       living: null,
       sources: [
         { label: "World History Encyclopedia: Eighth Crusade", url: "https://www.worldhistory.org/Eighth_Crusade/" },
-        { label: "World History Encyclopedia: Hafsid Dynasty — who al-Mustansir ruled", url: "https://www.worldhistory.org/Hafsid_Dynasty/" },
-        { label: "Internet Medieval Sourcebook: Sources on the Eighth Crusade and Tunis", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations on the Eighth Crusade and the North African campaign", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     }
   ]
@@ -707,7 +728,7 @@ const CRUSADES = [
 {
   id: 9, label: "Ninth Crusade", dates: "1271–1272",
   theme: "The Last", accent: "#2A2A2A",
-  desc: "The end of an era — a future king who arrived too late, a sultan who was already winning, and the people the Crusades claimed to protect but never asked.",
+  desc: "The end of an era: a future king who arrived too late, a sultan who was already winning, and the people the Crusades claimed to protect but never asked.",
   consequence: "Edward I of England achieved almost nothing militarily and left when his father died. Baibars continued dismantling the remaining Crusader territories. In 1291, twenty years later, the city of Acre, the last major Crusader stronghold in the Holy Land, fell to the Mamluks. The Crusader presence in the Holy Land was over.",
   legacy: "The Ninth Crusade has no clean ending because the Crusading movement did not end cleanly. Crusading rhetoric continued for centuries: in Spain's Reconquista, in wars against the Ottomans, in the way Christopher Columbus framed his voyage to the Americas. When the Crusades &lsquo;ended&rsquo; depends entirely on how you define them, a question still genuinely debated by historians today.",
   personas: [
@@ -720,8 +741,8 @@ const CRUSADES = [
       living: null,
       sources: [
         { label: "World History Encyclopedia: Edward I of England", url: "https://www.worldhistory.org/Edward_I_of_England/" },
-        { label: "World History Encyclopedia: Ninth Crusade", url: "https://www.worldhistory.org/Ninth_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Sources on the later Crusades and the fall of the Crusader States", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "World History Encyclopedia: Eighth Crusade", url: "https://www.worldhistory.org/Eighth_Crusade/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations on the later Crusades and the fall of the Crusader States", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -732,9 +753,9 @@ const CRUSADES = [
       unknowns: null,
       living: null,
       sources: [
-        { label: "World History Encyclopedia: Baibars", url: "https://www.worldhistory.org/Baibars/" },
-        { label: "World History Encyclopedia: Mamluk Sultanate — the political structure Baibars led", url: "https://www.worldhistory.org/Mamluk_Sultanate/" },
-        { label: "World History Encyclopedia: Battle of Ain Jalut (1260) — Baibars stops the Mongols", url: "https://www.worldhistory.org/Battle_of_Ain_Jalut/" }
+        { label: "World History Encyclopedia: Eighth Crusade", url: "https://www.worldhistory.org/Eighth_Crusade/" },
+        { label: "World History Encyclopedia: Crusader States", url: "https://www.worldhistory.org/Crusader_States/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations on the later Crusades and Mamluk expansion", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     },
     {
@@ -745,9 +766,9 @@ const CRUSADES = [
       unknowns: "Native Christian women in the Crusader States left almost no firsthand written accounts. We know about their communities through church records, legal documents, and passing mentions in chronicles mostly written by men. The inner life of this community, their own understanding of the Crusading project happening around and through them, is largely unrecoverable. Your character requires honest historical imagination, and your presentation should say so. The silence of ordinary people in the historical record is itself worth examining.",
       living: "Syrian Orthodox, Armenian, Maronite, Greek Orthodox, and Coptic Christian communities remain present across the Middle East today. They are direct descendants of the communities the Crusades claimed to protect. In recent decades these communities have faced severe persecution, displacement, and violence in Syria, Iraq, and Egypt. Their situation receives almost no coverage in standard Crusades curricula, even though they are the living continuation of the story.",
       sources: [
-        { label: "World History Encyclopedia: Crusader States — who actually lived in them, not just who ruled them", url: "https://www.worldhistory.org/Crusader_States/" },
-        { label: "World History Encyclopedia: Ninth Crusade", url: "https://www.worldhistory.org/Ninth_Crusade/" },
-        { label: "Internet Medieval Sourcebook: Sources on the fall of the Crusader States and their communities", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
+        { label: "World History Encyclopedia: Crusader States", url: "https://www.worldhistory.org/Crusader_States/" },
+        { label: "World History Encyclopedia: Eighth Crusade", url: "https://www.worldhistory.org/Eighth_Crusade/" },
+        { label: "Internet Medieval Sourcebook (Fordham): primary source translations on the fall of the Crusader States", url: "https://sourcebooks.fordham.edu/sbook1c.asp" }
       ]
     }
   ]
@@ -873,7 +894,7 @@ function buildSelect() {
       <div class="rule" style="max-width:400px;margin:16px auto;"></div>
       <p style="color:var(--muted);font-size:17px;font-style:italic;line-height:1.8;max-width:580px;margin:0 auto;">
         Select your Crusade. Your pair will inhabit <strong>two</strong> of three available voices
-        from inside it — and comment on the third, from your own character's point of view.
+        from inside it, and comment on the third, from your own character's point of view.
       </p>
     </div>
     <div class="crusade-grid">${cards}</div>
@@ -881,6 +902,71 @@ function buildSelect() {
       <button data-action="go-furniture" style="background:none;border:none;color:var(--faint);font-size:14px;font-family:inherit;text-decoration:underline;">
         ← Return to Mental Furniture
       </button>
+    </div>
+
+    <!-- Library Databases -->
+    <div style="margin-top:52px;">
+      <div class="eyebrow" style="text-align:center;">Your Arsenal</div>
+      <h2 class="section-title" style="text-align:center;font-size:clamp(20px,3.5vw,30px);margin-bottom:10px;">Library Databases</h2>
+      <p style="text-align:center;color:var(--muted);font-size:16px;font-style:italic;line-height:1.8;max-width:620px;margin:0 auto 28px;">
+        A Google search will get you a lot of information fast. Most of it will be wrong, incomplete, or written by someone with an agenda. These databases will slow you down. That's the point. Each one is edited by credentialed scholars, indexed by subject experts, and vetted for accuracy. Your school has paid for all of them. Use them first. Always.
+      </p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;">
+
+        <div class="db-card">
+          <div class="db-name">Britannica School</div>
+          <div class="db-desc">Your first stop, every time. Before you read anything else about your persona, read Britannica's article on them. It won't tell you everything. No single source does. But it will give you a reliable foundation and keep you from building your whole presentation on something you pulled from the third page of a Google search.</div>
+          <a class="db-link" href="http://school.eb.com/" target="_blank" rel="noopener">Open Britannica School →</a>
+        </div>
+
+        <div class="db-card">
+          <div class="db-name">World Book</div>
+          <div class="db-desc">Particularly strong on chronology and geographic context. Use it to build a mental timeline of your Crusade before you zoom in on a persona. When did things happen? In what order? Where? Get those questions answered first. Confusion about chronology is the most common way a historical argument falls apart.</div>
+          <a class="db-link" href="https://www.worldbookonline.com/" target="_blank" rel="noopener">Open World Book →</a>
+        </div>
+
+        <div class="db-card">
+          <div class="db-name">Gale in Context: Biography</div>
+          <div class="db-desc">Type your persona's name into Gale and it pulls together encyclopedia articles, magazine coverage, and biographical reference content in one place. Think of it as a well-organized file on a person: who they were, how historians have described them, how journalists and writers have characterized them over time. That last part makes it especially useful for your Reception History requirement. How has this person been remembered, simplified, or distorted since they died?</div>
+          <a class="db-link" href="https://link.gale.com/apps/BIC?u=nort87507" target="_blank" rel="noopener">Open Gale Biography →</a>
+        </div>
+
+        <div class="db-card">
+          <div class="db-name">Ancient &amp; Medieval History</div>
+          <div class="db-desc">Built for exactly the era you're studying. Most general databases treat the medieval world as a footnote. This one treats it as the main event. People, battles, dynasties, ideas, religious movements: all covered in depth by scholars who actually know this period. If your persona exists in the historical record, look here first.</div>
+          <a class="db-link" href="https://online.infobaselearning.com/Direct.aspx?pid=WE49&aid=17282" target="_blank" rel="noopener">Open Ancient &amp; Medieval History →</a>
+        </div>
+
+        <div class="db-card">
+          <div class="db-name">Issues &amp; Controversies in History</div>
+          <div class="db-desc">Here's something most history classes don't tell you: historians argue. Constantly. About causes, consequences, who mattered, and who got left out of the story entirely. This database is built around those arguments. It's essential for your Reception History requirement. How have people disagreed about the Crusades over eight centuries? Start here.</div>
+          <a class="db-link" href="https://online.infobaselearning.com/Direct.aspx?pid=WE58&aid=17282" target="_blank" rel="noopener">Open Issues &amp; Controversies →</a>
+        </div>
+
+        <div class="db-card">
+          <div class="db-name">World Religions</div>
+          <div class="db-desc">You cannot understand the Crusades without understanding what people actually believed. Not a caricature. Not "they were very religious." What they believed, from the inside, in their own terms. Catholic theology, Orthodox Christianity, Sunni and Shia Islam: these are not interchangeable. Treating them as such produces bad history. This librarian-curated guide points you toward vetted databases and reference sources on each major tradition. Use it as a starting point, then follow its links.</div>
+          <a class="db-link" href="https://wehs.westex.libguides.com/world_religions" target="_blank" rel="noopener">Open World Religions →</a>
+        </div>
+
+        <div class="db-card">
+          <div class="db-name">EBSCO Explora</div>
+          <div class="db-desc">A wide net. EBSCO Explora pulls from thousands of magazines, newspapers, and reference works at once, with full-text access to most of what it finds. It's designed for school researchers, so the interface is approachable. Best used once you have a focused question rather than a general topic. The broader your search, the noisier the results.</div>
+          <a class="db-link" href="https://research.ebsco.com/c/z7bwvs" target="_blank" rel="noopener">Open EBSCO Explora →</a>
+        </div>
+
+        <div class="db-card">
+          <div class="db-name">JSTOR</div>
+          <div class="db-desc">This is where historians publish their arguments for each other. Peer-reviewed journals, academic books, primary source collections: JSTOR archives decades of scholarship across hundreds of disciplines. The writing is harder than an encyclopedia article. It's also more specific, more contested, and more current than anything else on this list. It rewards the effort you put in.</div>
+          <a class="db-link" href="https://www.jstor.org/" target="_blank" rel="noopener">Open JSTOR →</a>
+        </div>
+
+      </div>
+
+      <p style="text-align:center;color:var(--faint);font-size:13px;font-style:italic;margin-top:20px;line-height:1.7;">
+        Some of these links require your school login. If a link doesn't open, ask Mr. T: he can get you in.
+      </p>
     </div>
   `;
 }
@@ -916,7 +1002,7 @@ function buildPersonas() {
       <div>
         <div style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:${c.accent};margin-bottom:6px;">Your Group's Orders</div>
         <div style="font-size:16px;color:var(--muted);line-height:1.75;">
-          Below are <strong>three historical voices</strong> from this Crusade. Your pair picks <strong>two</strong> to present in character. For the third — comment on that person <em>from inside your own character's perspective.</em> What would your character think of them? What would they say to their face?
+          Below are <strong>three historical voices</strong> from this Crusade. Your pair picks <strong>two</strong> to present in character. For the third, comment on that person <em>from inside your own character's perspective.</em> What would your character think of them? What would they say to their face?
         </div>
       </div>
     </div>
@@ -927,21 +1013,21 @@ function buildPersonas() {
       <div class="req-icon">🗺️</div>
       <div>
         <div class="req-label">Required: Your Annotated Map</div>
-        <div class="req-text">Your map must <em>argue</em> from your character's perspective — not just show where things happened. A Venetian merchant's map puts ports and trade routes at the center. A Mamluk general's map shows supply lines and fortifications. A Byzantine noblewoman's map centers Constantinople. A Syrian Christian's map traces communities, not armies. The map is not decoration. It is an interpretation.</div>
+        <div class="req-text">Your map must <em>argue</em> from your character's perspective, not just show where things happened. A Venetian merchant's map puts ports and trade routes at the center. A Mamluk general's map shows supply lines and fortifications. A Byzantine noblewoman's map centers Constantinople. A Syrian Christian's map traces communities, not armies. The map is not decoration. It is an interpretation.</div>
       </div>
     </div>
     <div class="req">
       <div class="req-icon">📡</div>
       <div>
         <div class="req-label">Required: Reception History</div>
-        <div class="req-text">Every presentation must include at least one example of how your Crusade or your character has been remembered, invoked, or distorted <em>after the fact</em> — by later medieval writers, 19th-century nationalists, 20th-century political movements, or contemporary media and politics. History is not only what happened. It is also what people have claimed happened, and why that claiming matters.</div>
+        <div class="req-text">Every presentation must include at least one example of how your Crusade or your character has been remembered, invoked, or distorted <em>after the fact</em>, by later medieval writers, 19th-century nationalists, 20th-century political movements, or contemporary media and politics. History is not only what happened. It is also what people have claimed happened, and why that claiming matters.</div>
       </div>
     </div>
 
     <div class="callout" style="margin-top:20px;">
       <div class="callout-label" style="color:var(--blue);">For Further Reading</div>
       <div style="font-size:16px;color:var(--muted);line-height:1.8;">
-        Ada Palmer's essays at <a class="source-link" href="https://www.exurbe.com" target="_blank" rel="noopener">ExUrbe.com</a> explore how medieval people thought about their world — essential mental furniture for this project. Historians Matthew Gabriele and David Perry's book <em>The Bright Ages</em> (2021, available in most libraries and as an audiobook) makes the case that the medieval world was far more complex, diverse, and connected than the myths suggest.
+        Ada Palmer's essays at <a class="source-link" href="https://www.exurbe.com" target="_blank" rel="noopener">ExUrbe.com</a> explore how medieval people thought about their world (essential mental furniture for this project). Historians Matthew Gabriele and David Perry's book <em>The Bright Ages</em> (2021, available in most libraries and as an audiobook) makes the case that the medieval world was far more complex, diverse, and connected than the myths suggest.
       </div>
     </div>
 
@@ -986,7 +1072,7 @@ function buildPersonaBody(p, accent) {
 
   const livingBox = p.living ? `
     <div class="colored-box" style="background:rgba(10,72,120,0.09);border:1px solid rgba(10,72,120,0.35);">
-      <div class="box-label" style="color:var(--blue);">Living Inheritance — Still Present Today</div>
+      <div class="box-label" style="color:var(--blue);">Living Inheritance | Still Present Today</div>
       <div class="box-text">${p.living}</div>
     </div>` : '';
 
@@ -1003,7 +1089,7 @@ function buildPersonaBody(p, accent) {
       <div class="persona-bio">${p.bio}</div>
 
       <div class="colored-box" style="background:rgba(${hexToRgb(accent)},0.09);border:1px solid rgba(${hexToRgb(accent)},0.35);">
-        <div class="box-label" style="color:${accent};">Your Presentation Angle — Include Reception History</div>
+        <div class="box-label" style="color:${accent};">Your Presentation Angle | Include Reception History</div>
         <div class="box-text">${p.angle}</div>
       </div>
 
@@ -1011,9 +1097,9 @@ function buildPersonaBody(p, accent) {
       ${livingBox}
 
       <div class="source-section">
-        <div class="source-label">Start Here — Recommended Sources</div>
+        <div class="source-label">Start Here | Recommended Sources</div>
         <div class="source-disclaimer">
-          ⚠️ These links lead to the best freely available academic sources we know of. Most go directly to the article you need. The <em>Internet Medieval Sourcebook</em> (Fordham) links all open the Crusades index — you'll need to scroll or use Ctrl+F to find your specific text. That digging is part of the research process. The Metropolitan Museum link may require some navigation within their collection browser. All links were verified as of early 2026.
+          ⚠️ These links lead to the best freely available academic sources we know of. Most go directly to the article you need. The <em>Internet Medieval Sourcebook</em> (Fordham) links all open the Crusades index, so scroll or use Ctrl+F to find your specific text. That digging is part of the research process. The Metropolitan Museum link may require some navigation within their collection browser. All links were verified as of early 2026.
         </div>
         ${sourceItems}
       </div>
